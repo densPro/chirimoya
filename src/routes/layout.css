@@ -1,0 +1,106 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-app: #2c3531;
+  --color-card: #35403b;
+  --color-accent: #d4e79e;
+  --color-primary: #fdfbf7;
+  --color-muted: #8fa49c;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-sage: #96c499;
+
+  --font-sans: 'Lekton', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #2c3531;
+  color: #fdfbf7;
+  font-family: 'Macondo', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #2c3531;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a5a53;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4e79e;
+}
+
+/* Clinical mono values */
+.clinical {
+  font-family: 'JetBrains Mono', monospace;
+  color: #d4e79e;
+}
+
+/* Glassmorphism */
+.glass {
+  background-color: rgba(44, 53, 49, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Skeleton loader animation */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #35403b 25%, #3d4d45 50%, #35403b 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Slide-in modal animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-enter {
+  animation: slideIn 0.2s ease-out;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
