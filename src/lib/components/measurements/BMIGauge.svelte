@@ -99,13 +99,13 @@
 		<text x={cx} y={cy + 32} text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="22" fill={color} font-weight="500">
 			{bmi != null ? bmi.toFixed(2) : '—'}
 		</text>
-		<text x={cx} y={cy + 47} text-anchor="middle" font-family="Macondo, serif" font-size="10" fill="#8fa49c" letter-spacing="1">
+		<text x={cx} y={cy + 47} text-anchor="middle" font-family="Quicksand, sans-serif" font-size="10" fill="#8fa49c" letter-spacing="1">
 			{displayCategory?.toUpperCase() ?? ''}
 		</text>
 
 		<!-- Zone labels -->
-		<text x={arcPoint(startAngle + 8).x - 4} y={arcPoint(startAngle + 8).y + 4} text-anchor="end" font-size="7" fill="#60a5fa" font-family="Macondo, serif">Under</text>
-		<text x={arcPoint(endAngle - 8).x + 4} y={arcPoint(endAngle - 8).y + 4} text-anchor="start" font-size="7" fill="#f87171" font-family="Macondo, serif">Obese</text>
+		<text x={arcPoint(startAngle + 8).x - 4} y={arcPoint(startAngle + 8).y + 4} text-anchor="end" font-size="7" fill="#60a5fa" font-family="Quicksand, sans-serif">Under</text>
+		<text x={arcPoint(endAngle - 8).x + 4} y={arcPoint(endAngle - 8).y + 4} text-anchor="start" font-size="7" fill="#f87171" font-family="Quicksand, sans-serif">Obese</text>
 	</svg>
 
 	<!-- Legend -->
