@@ -1,0 +1,253 @@
+{
+  "nav": {
+    "dashboard": "Tablero",
+    "patients": "Pacientes",
+    "health": "Salud",
+    "collapse": "Colapsar",
+    "expand": "Expandir",
+    "clinical": "Clínico"
+  },
+  "topbar": {
+    "searchPlaceholder": "Buscar por MRN o nombre…",
+    "profile": "Perfil"
+  },
+  "dashboard": {
+    "totalPatients": "Pacientes Totales",
+    "active": "Activos",
+    "inactive": "Inactivos",
+    "deceased": "Fallecidos",
+    "recentPatients": "Pacientes Recientes",
+    "viewAll": "Ver todos →",
+    "noPatients": "No se encontraron pacientes.",
+    "addFirst": "Agregar el primero →",
+    "apiStatus": "Estado de API",
+    "online": "En línea",
+    "offline": "Desconectado",
+    "quickActions": "Acciones Rápidas",
+    "newPatient": "Nuevo Paciente",
+    "searchPatients": "Buscar Pacientes",
+    "healthStatus": "Estado de Salud"
+  },
+  "patients": {
+    "title": "Pacientes",
+    "found": "{total, plural, =0 {Ningún paciente encontrado} =1 {1 paciente encontrado} other {{total} pacientes encontrados}}",
+    "newPatient": "Nuevo Paciente",
+    "registerDescription": "Registrar un nuevo paciente en el sistema",
+    "searchPlaceholder": "Buscar por nombre, MRN, correo...",
+    "status": "Estado",
+    "sortBy": "Ordenar por",
+    "clearFilters": "Limpiar",
+    "emptyTitle": "No se encontraron pacientes",
+    "emptyMessage": "Intente ajustar sus filtros de búsqueda o agregue un nuevo paciente.",
+    "editPatient": "Editar Paciente",
+    "columns": {
+      "name": "Nombre",
+      "mrn": "MRN",
+      "gender": "Género",
+      "age": "Edad",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "actions": {
+      "edit": "Editar",
+      "view": "Ver Detalles"
+    },
+    "toasts": {
+      "loadFailed": "Error al cargar pacientes",
+      "createSuccess": "Paciente \"{name}\" creado con éxito",
+      "createFailed": "Error al crear paciente",
+      "updateSuccess": "Paciente actualizado con éxito",
+      "updateFailed": "Error al actualizar paciente",
+      "statusSuccess": "Estado actualizado a {status}",
+      "statusFailed": "Error al actualizar estado"
+    }
+  },
+  "patient": {
+    "profile": "Perfil del Paciente",
+    "back": "Pacientes / Perfil",
+    "edit": "Editar",
+    "age": "{age} años",
+    "tabs": {
+      "overview": "Resumen",
+      "medical": "Médico",
+      "emergency": "Emergencia y Seguro",
+      "measurements": "Mediciones"
+    },
+    "demographics": {
+      "title": "Datos Demográficos",
+      "dob": "Fecha de Nacimiento",
+      "gender": "Género",
+      "maritalStatus": "Estado Civil",
+      "ssn": "Últimos 4 SSN",
+      "nationalId": "Identificación Nacional",
+      "registered": "Registrado"
+    },
+    "contact": {
+      "title": "Contacto",
+      "phone": "Teléfono",
+      "email": "Correo",
+      "secondaryPhone": "Teléfono Secundario",
+      "address": "Dirección",
+      "noInfo": "Sin información de contacto"
+    },
+    "medical": {
+      "bloodType": "Grupo Sanguíneo",
+      "allergies": "Alergias",
+      "chronicConditions": "Condiciones Crónicas",
+      "clinicalNotes": "Notas Clínicas",
+      "unknown": "Desconocido",
+      "noAllergies": "Sin alergias conocidas",
+      "noChronic": "No hay condiciones crónicas registradas"
+    },
+    "emergency": {
+      "title": "Contacto de Emergencia",
+      "name": "Nombre",
+      "relationship": "Relación",
+      "phone": "Teléfono",
+      "email": "Correo",
+      "noContact": "Sin contacto de emergencia registrado"
+    },
+    "insurance": {
+      "title": "Seguro Médico",
+      "provider": "Proveedor",
+      "policy": "Nº de Póliza",
+      "group": "Nº de Grupo",
+      "subscriber": "Asegurado",
+      "effective": "Efectivo",
+      "expires": "Vence",
+      "noInsurance": "Sin información de seguro registrado"
+    },
+    "measurements": {
+      "title": "Historial de Mediciones",
+      "fullHistory": "Historial Completo →",
+      "latest": "Última Medición",
+      "height": "Altura",
+      "weight": "Peso",
+      "bmi": "IMC",
+      "noMeasurements": "No hay mediciones registradas aún.",
+      "recordNew": "+ Registrar Nueva Medición"
+    }
+  },
+  "measurements": {
+    "title": "Mediciones de {name}",
+    "defaultTitle": "Mediciones",
+    "recordsCount": "{total, plural, =0 {Ningún registro} =1 {1 registro} other {{total} registros}}",
+    "recordMeasurement": "Registrar Medición",
+    "latestBmi": "IMC Reciente",
+    "latestMeasurements": "Últimas Mediciones",
+    "height": "Altura cm",
+    "weight": "Peso kg",
+    "waist": "Cintura cm",
+    "hip": "Cadera cm",
+    "bmrHb": "TMB (HB)",
+    "bmrMsj": "TMB (MSJ)",
+    "healthyWeight": "Peso Saludable kg",
+    "bmi": "IMC",
+    "tdee": "Desglose TDEE (Harris-Benedict)",
+    "calorieRequirements": "Requerimientos Calóricos Clínicos (Harris-Benedict)",
+    "timeline": "Cronología de Mediciones",
+    "noMeasurements": "No hay mediciones registradas aún.",
+    "recordFirst": "Registrar la primera medición →",
+    "toasts": {
+      "loadFailed": "Error al cargar datos",
+      "saveSuccess": "Medición registrada con éxito",
+      "saveFailed": "Error al registrar medición"
+    },
+    "activity": {
+      "sedentary": "Sedentario",
+      "lightly_active": "Ligeramente Activo",
+      "moderately_active": "Moderadamente Activo",
+      "very_active": "Muy Activo"
+    }
+  },
+  "form": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "saving": "Guardando...",
+    "submitting": "Enviando...",
+    "optional": "Opcional",
+    "saveChanges": "Guardar Cambios",
+    "createPatient": "Crear Paciente",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "tabs": {
+      "demographics": "Datos Demográficos",
+      "medical": "Datos Médicos",
+      "contactAddress": "Contacto y Dirección",
+      "emergencyInsurance": "Emergencia y Seguro"
+    },
+    "genderOptions": {
+      "male": "Masculino",
+      "female": "Femenino",
+      "other": "Otro",
+      "unknown": "Desconocido"
+    },
+    "maritalOptions": {
+      "single": "Soltero/a",
+      "married": "Casado/a",
+      "divorced": "Divorciado/a",
+      "widowed": "Viudo/a",
+      "separated": "Separado/a",
+      "domestic_partnership": "Unión Libre",
+      "unknown": "Desconocido"
+    },
+    "labels": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "dob": "Fecha de Nacimiento",
+      "gender": "Género",
+      "maritalStatus": "Estado Civil",
+      "ssn": "Últimos 4 SSN",
+      "nationalId": "Identificación Nacional",
+      "bloodType": "Grupo Sanguíneo",
+      "clinicalNotes": "Notas Clínicas",
+      "phone": "Teléfono",
+      "email": "Correo Electrónico",
+      "secondaryPhone": "Teléfono Secundario",
+      "street1": "Calle Línea 1",
+      "street2": "Calle Línea 2",
+      "city": "Ciudad",
+      "state": "Estado / Provincia",
+      "postal": "Código Postal",
+      "country": "País",
+      "ecName": "Nombre Completo",
+      "ecRelation": "Relación",
+      "ecPhone": "Número de Teléfono",
+      "ecEmail": "Correo",
+      "insProvider": "Nombre del Proveedor",
+      "insPolicy": "Número de Póliza",
+      "insGroup": "Número de Grupo",
+      "insSubscriber": "Nombre del Asegurado",
+      "insSubRel": "Relación con el Asegurado",
+      "insEffective": "Fecha de Inicio",
+      "insExpiration": "Fecha de Vencimiento"
+    },
+    "placeholders": {
+      "selectGender": "Seleccione género",
+      "selectMarital": "Seleccione estado",
+      "selectBloodType": "Seleccione tipo",
+      "notes": "Notas opcionales…",
+      "allergy": "Escriba alergia y presione Enter",
+      "condition": "Escriba condición y presione Enter",
+      "street2": "Apartamento, suite, etc."
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "all": "Todos"
+  },
+  "healthPage": {
+    "title": "Estado de la API",
+    "lastChecked": "Última comprobación: {time} · Se actualiza cada 10s",
+    "operational": "Todos los sistemas operativos",
+    "degraded": "Degradado",
+    "liveness": "Prueba de Vida (Liveness)",
+    "readiness": "Prueba de Preparación (Readiness)",
+    "endpoint": "punto de acceso",
+    "status": "estado",
+    "service": "servicio",
+    "database": "base de datos",
+    "unreachable": "inaccesible",
+    "connectionFailed": "Conexión fallida: ¿está la API ejecutándose?"
+  }
+}

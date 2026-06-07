@@ -4,6 +4,7 @@
 	import PatientStatusBadge from './PatientStatusBadge.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { Eye, Pencil } from '@lucide/svelte';
+	import { _ } from 'svelte-i18n';
 
 	interface Props {
 		patients: PatientResponseDTO[];
@@ -17,15 +18,15 @@
 	<table class="w-full text-sm">
 		<thead>
 			<tr class="border-b border-white/[0.06] bg-[#2C3531]/50">
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">MRN</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Patient</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">DOB</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Age</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Gender</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Blood</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Status</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">BMI</th>
-				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Actions</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patients.columns.mrn')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patients.columns.name')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.demographics.dob')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patients.columns.age')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patients.columns.gender')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.medical.bloodType')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patients.columns.status')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.measurements.bmi')}</th>
+				<th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patients.columns.actions')}</th>
 			</tr>
 		</thead>
 		<tbody class="divide-y divide-white/[0.04] bg-[#35403B]">
@@ -55,7 +56,7 @@
 						{/if}
 					</td>
 					<td class="px-4 py-3 capitalize text-[#FDFBF7]/60">
-						{p.gender.replace('_', ' ')}
+						{$_('form.genderOptions.' + p.gender, { default: p.gender })}
 					</td>
 					<td class="px-4 py-3">
 						{#if p.blood_type && p.blood_type !== 'unknown'}
@@ -83,14 +84,14 @@
 							<a
 								href="/patients/{p.id}"
 								class="flex h-7 w-7 items-center justify-center rounded-lg text-[#FDFBF7]/40 transition-colors hover:bg-white/10 hover:text-[#D4E79E]"
-								title="View patient"
+								title={$_('patients.actions.view')}
 							>
 								<Eye size={14} />
 							</a>
 							<button
 								onclick={() => onEdit(p)}
 								class="flex h-7 w-7 items-center justify-center rounded-lg text-[#FDFBF7]/40 transition-colors hover:bg-white/10 hover:text-[#D4E79E]"
-								title="Edit patient"
+								title={$_('patients.actions.edit')}
 							>
 								<Pencil size={14} />
 							</button>

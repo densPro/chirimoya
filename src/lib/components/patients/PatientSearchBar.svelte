@@ -2,6 +2,7 @@
 	import type { PatientStatus } from '$lib/types';
 	import Input from '$lib/components/ui/Input.svelte';
 	import { Search } from '@lucide/svelte';
+	import { _ } from 'svelte-i18n';
 
 	interface Props {
 		onSearch: (params: {
@@ -21,12 +22,7 @@
 	let dob = $state('');
 	let activeStatus = $state<PatientStatus | undefined>(undefined);
 
-	const statusOptions: { value: PatientStatus | ''; label: string }[] = [
-		{ value: '', label: 'All' },
-		{ value: 'active', label: 'Active' },
-		{ value: 'inactive', label: 'Inactive' },
-		{ value: 'deceased', label: 'Deceased' }
-	];
+	const statusOptions: (PatientStatus | '')[] = ['', 'active', 'inactive', 'deceased'];
 
 	let debounceTimer: ReturnType<typeof setTimeout>;
 
@@ -67,7 +63,7 @@
 				type="text"
 				bind:value={firstName}
 				oninput={triggerSearch}
-				placeholder="First name"
+				placeholder={$_('form.labels.firstName')}
 				class="h-9 w-full rounded-lg border border-white/10 bg-[#2C3531] pl-8 pr-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30"
 			/>
 		</div>
@@ -75,14 +71,14 @@
 			type="text"
 			bind:value={lastName}
 			oninput={triggerSearch}
-			placeholder="Last name"
+			placeholder={$_('form.labels.lastName')}
 			class="h-9 rounded-lg border border-white/10 bg-[#2C3531] px-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30"
 		/>
 		<input
 			type="text"
 			bind:value={mrn}
 			oninput={triggerSearch}
-			placeholder="MRN"
+			placeholder={$_('patients.columns.mrn')}
 			class="h-9 rounded-lg border border-white/10 bg-[#2C3531] px-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30 font-mono"
 		/>
 		<input
@@ -96,15 +92,15 @@
 	<!-- Status chips + reset -->
 	<div class="flex items-center justify-between">
 		<div class="flex items-center gap-2">
-			<span class="text-xs text-[#FDFBF7]/40">Status:</span>
-			{#each statusOptions as opt (opt.value)}
+			<span class="text-xs text-[#FDFBF7]/40">{$_('patients.status')}:</span>
+			{#each statusOptions as opt (opt)}
 				<button
-					onclick={() => setStatus(opt.value === '' ? undefined : (opt.value as PatientStatus))}
-					class="rounded-full border px-3 py-1 text-xs font-medium transition-all duration-150 {(activeStatus === undefined && opt.value === '') || activeStatus === opt.value
+					onclick={() => setStatus(opt === '' ? undefined : (opt as PatientStatus))}
+					class="rounded-full border px-3 py-1 text-xs font-medium transition-all duration-150 {(activeStatus === undefined && opt === '') || activeStatus === opt
 						? 'border-[#D4E79E]/40 bg-[#D4E79E]/10 text-[#D4E79E]'
 						: 'border-white/10 text-[#FDFBF7]/50 hover:border-white/20 hover:text-[#FDFBF7]'}"
 				>
-					{opt.label}
+					{opt === '' ? $_('common.all') : $_('dashboard.' + opt)}
 				</button>
 			{/each}
 		</div>
@@ -112,7 +108,7 @@
 			onclick={handleReset}
 			class="text-xs text-[#FDFBF7]/30 transition-colors hover:text-[#FDFBF7]/60"
 		>
-			Reset filters
+			{$_('patients.clearFilters')}
 		</button>
 	</div>
 </div>

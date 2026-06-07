@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { LayoutDashboard, Users, HeartPulse, ChevronLeft, ChevronRight, Leaf } from '@lucide/svelte';
+	import { _ } from 'svelte-i18n';
 
 	interface Props {
 		collapsed?: boolean;
@@ -9,9 +10,9 @@
 	let { collapsed = $bindable(false) }: Props = $props();
 
 	const navItems = [
-		{ href: '/', label: 'Dashboard', icon: LayoutDashboard },
-		{ href: '/patients', label: 'Patients', icon: Users },
-		{ href: '/health', label: 'Health', icon: HeartPulse }
+		{ href: '/', key: 'dashboard', icon: LayoutDashboard },
+		{ href: '/patients', key: 'patients', icon: Users },
+		{ href: '/health', key: 'health', icon: HeartPulse }
 	];
 
 	function isActive(href: string): boolean {
@@ -38,7 +39,7 @@
 		{#if !collapsed}
 			<div>
 				<p class="text-sm font-bold tracking-wide text-[#FDFBF7]">Chirimoya</p>
-				<p class="text-[10px] text-[#FDFBF7]/40 uppercase tracking-widest">Clinical</p>
+				<p class="text-[10px] text-[#FDFBF7]/40 uppercase tracking-widest">{$_('nav.clinical')}</p>
 			</div>
 		{/if}
 	</div>
@@ -47,6 +48,7 @@
 	<nav class="flex-1 space-y-1 px-2 py-4">
 		{#each navItems as item (item.href)}
 			{@const active = isActive(item.href)}
+			{@const label = $_(`nav.${item.key}`)}
 			<a
 				href={item.href}
 				class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 {collapsed
@@ -54,11 +56,11 @@
 					: ''} {active
 					? 'bg-[#D4E79E]/10 text-[#D4E79E]'
 					: 'text-[#FDFBF7]/50 hover:bg-white/5 hover:text-[#FDFBF7]'}"
-				title={collapsed ? item.label : undefined}
+				title={collapsed ? label : undefined}
 			>
 				<item.icon size={18} />
 				{#if !collapsed}
-					<span>{item.label}</span>
+					<span>{label}</span>
 				{/if}
 				{#if active && !collapsed}
 					<span class="ml-auto h-1.5 w-1.5 rounded-full bg-[#D4E79E]"></span>
@@ -77,7 +79,7 @@
 				<ChevronRight size={16} />
 			{:else}
 				<ChevronLeft size={16} />
-				<span>Collapse</span>
+				<span>{$_('nav.collapse')}</span>
 			{/if}
 		</button>
 	</div>

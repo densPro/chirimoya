@@ -7,20 +7,21 @@
 	import Spinner from '$lib/components/ui/Spinner.svelte';
 	import { Users, UserCheck, UserX, Skull, Activity } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
+	import { _ } from 'svelte-i18n';
 
 	interface KPI {
-		label: string;
+		key: string;
 		value: number | null;
 		icon: typeof Users;
 		color: string;
 		status?: string;
 	}
 
-	let kpis = $state<{ label: string; value: number | null; icon: typeof Users; color: string }[]>([
-		{ label: 'Total Patients', value: null, icon: Users, color: '#D4E79E' },
-		{ label: 'Active', value: null, icon: UserCheck, color: '#96c499' },
-		{ label: 'Inactive', value: null, icon: UserX, color: '#8fa49c' },
-		{ label: 'Deceased', value: null, icon: Skull, color: '#f87171' }
+	let kpis = $state<{ key: string; value: number | null; icon: typeof Users; color: string }[]>([
+		{ key: 'totalPatients', value: null, icon: Users, color: '#D4E79E' },
+		{ key: 'active', value: null, icon: UserCheck, color: '#96c499' },
+		{ key: 'inactive', value: null, icon: UserX, color: '#8fa49c' },
+		{ key: 'deceased', value: null, icon: Skull, color: '#f87171' }
 	]);
 
 	let recentPatients = $state<PatientResponseDTO[]>([]);
@@ -71,11 +72,11 @@
 <div class="space-y-6">
 	<!-- KPI Cards -->
 	<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-		{#each kpis as kpi, i (kpi.label)}
+		{#each kpis as kpi, i (kpi.key)}
 			<Card class="fade-in" style="animation-delay: {i * 60}ms">
 				<div class="flex items-center justify-between">
 					<div>
-						<p class="text-xs font-medium uppercase tracking-wider text-[#FDFBF7]/40">{kpi.label}</p>
+						<p class="text-xs font-medium uppercase tracking-wider text-[#FDFBF7]/40">{$_(`dashboard.${kpi.key}`)}</p>
 						{#if loadingKpis}
 							<div class="skeleton mt-2 h-8 w-16 rounded"></div>
 						{:else}
@@ -97,9 +98,9 @@
 		<!-- Recent Patients -->
 		<div class="lg:col-span-2">
 			<div class="mb-3 flex items-center justify-between">
-				<h2 class="text-sm font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Recent Patients</h2>
+				<h2 class="text-sm font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('dashboard.recentPatients')}</h2>
 				<a href="/patients" class="text-xs text-[#D4E79E]/70 transition-colors hover:text-[#D4E79E]">
-					View all →
+					{$_('dashboard.viewAll')}
 				</a>
 			</div>
 			{#if loadingRecent}
@@ -110,7 +111,7 @@
 				</div>
 			{:else if recentPatients.length === 0}
 				<Card>
-					<p class="text-center text-sm text-[#FDFBF7]/40 py-8">No patients found. <a href="/patients/new" class="text-[#D4E79E] hover:underline">Add the first one →</a></p>
+					<p class="text-center text-sm text-[#FDFBF7]/40 py-8">{$_('dashboard.noPatients')} <a href="/patients/new" class="text-[#D4E79E] hover:underline">{$_('dashboard.addFirst')}</a></p>
 				</Card>
 			{:else}
 				<div class="space-y-2">
@@ -128,7 +129,7 @@
 				<div class="flex items-center justify-between">
 					<div class="flex items-center gap-2">
 						<Activity size={16} class="text-[#FDFBF7]/50" />
-						<span class="text-sm font-medium text-[#FDFBF7]/70">API Status</span>
+						<span class="text-sm font-medium text-[#FDFBF7]/70">{$_('dashboard.apiStatus')}</span>
 					</div>
 					{#if healthOk === null}
 						<Spinner size="sm" />
@@ -139,7 +140,7 @@
 								class:animate-pulse={healthOk}
 							></span>
 							<span class="text-xs {healthOk ? 'text-[#96c499]' : 'text-red-400'}">
-								{healthOk ? 'Online' : 'Offline'}
+								{healthOk ? $_('dashboard.online') : $_('dashboard.offline')}
 							</span>
 						</div>
 					{/if}
@@ -151,28 +152,28 @@
 
 			<!-- Quick Actions -->
 			<Card>
-				<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Quick Actions</h3>
+				<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('dashboard.quickActions')}</h3>
 				<div class="space-y-2">
 					<a
 						href="/patients/new"
 						class="flex items-center gap-3 rounded-lg border border-[#D4E79E]/20 bg-[#D4E79E]/5 px-3 py-2.5 text-sm font-medium text-[#D4E79E] transition-all hover:bg-[#D4E79E]/10"
 					>
 						<span class="text-base">+</span>
-						New Patient
+						{$_('dashboard.newPatient')}
 					</a>
 					<a
 						href="/patients"
 						class="flex items-center gap-3 rounded-lg border border-white/10 px-3 py-2.5 text-sm font-medium text-[#FDFBF7]/60 transition-all hover:border-white/20 hover:text-[#FDFBF7]"
 					>
 						<span class="text-base">🔍</span>
-						Search Patients
+						{$_('dashboard.searchPatients')}
 					</a>
 					<a
 						href="/health"
 						class="flex items-center gap-3 rounded-lg border border-white/10 px-3 py-2.5 text-sm font-medium text-[#FDFBF7]/60 transition-all hover:border-white/20 hover:text-[#FDFBF7]"
 					>
 						<span class="text-base">💚</span>
-						Health Status
+						{$_('dashboard.healthStatus')}
 					</a>
 				</div>
 			</Card>

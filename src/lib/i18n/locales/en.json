@@ -1,0 +1,253 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "patients": "Patients",
+    "health": "Health",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "clinical": "Clinical"
+  },
+  "topbar": {
+    "searchPlaceholder": "Search by MRN or name…",
+    "profile": "Profile"
+  },
+  "dashboard": {
+    "totalPatients": "Total Patients",
+    "active": "Active",
+    "inactive": "Inactive",
+    "deceased": "Deceased",
+    "recentPatients": "Recent Patients",
+    "viewAll": "View all →",
+    "noPatients": "No patients found.",
+    "addFirst": "Add the first one →",
+    "apiStatus": "API Status",
+    "online": "Online",
+    "offline": "Offline",
+    "quickActions": "Quick Actions",
+    "newPatient": "New Patient",
+    "searchPatients": "Search Patients",
+    "healthStatus": "Health Status"
+  },
+  "patients": {
+    "title": "Patients",
+    "found": "{total} patient{total, plural, =1 {} other {s}} found",
+    "newPatient": "New Patient",
+    "registerDescription": "Register a new patient in the system",
+    "searchPlaceholder": "Search by name, MRN, email...",
+    "status": "Status",
+    "sortBy": "Sort By",
+    "clearFilters": "Clear",
+    "emptyTitle": "No patients found",
+    "emptyMessage": "Try adjusting your search filters or add a new patient.",
+    "editPatient": "Edit Patient",
+    "columns": {
+      "name": "Name",
+      "mrn": "MRN",
+      "gender": "Gender",
+      "age": "Age",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "actions": {
+      "edit": "Edit",
+      "view": "View Details"
+    },
+    "toasts": {
+      "loadFailed": "Failed to load patients",
+      "createSuccess": "Patient \"{name}\" created successfully",
+      "createFailed": "Failed to create patient",
+      "updateSuccess": "Patient updated successfully",
+      "updateFailed": "Failed to update patient",
+      "statusSuccess": "Status updated to {status}",
+      "statusFailed": "Failed to update status"
+    }
+  },
+  "patient": {
+    "profile": "Patient Profile",
+    "back": "Patients / Profile",
+    "edit": "Edit",
+    "age": "{age} years old",
+    "tabs": {
+      "overview": "Overview",
+      "medical": "Medical",
+      "emergency": "Emergency & Insurance",
+      "measurements": "Measurements"
+    },
+    "demographics": {
+      "title": "Demographics",
+      "dob": "Date of Birth",
+      "gender": "Gender",
+      "maritalStatus": "Marital Status",
+      "ssn": "SSN Last 4",
+      "nationalId": "National ID",
+      "registered": "Registered"
+    },
+    "contact": {
+      "title": "Contact",
+      "phone": "Phone",
+      "email": "Email",
+      "secondaryPhone": "Secondary Phone",
+      "address": "Address",
+      "noInfo": "No contact info"
+    },
+    "medical": {
+      "bloodType": "Blood Type",
+      "allergies": "Allergies",
+      "chronicConditions": "Chronic Conditions",
+      "clinicalNotes": "Clinical Notes",
+      "unknown": "Unknown",
+      "noAllergies": "No known allergies",
+      "noChronic": "No chronic conditions recorded"
+    },
+    "emergency": {
+      "title": "Emergency Contact",
+      "name": "Name",
+      "relationship": "Relationship",
+      "phone": "Phone",
+      "email": "Email",
+      "noContact": "No emergency contact on file"
+    },
+    "insurance": {
+      "title": "Insurance",
+      "provider": "Provider",
+      "policy": "Policy #",
+      "group": "Group #",
+      "subscriber": "Subscriber",
+      "effective": "Effective",
+      "expires": "Expires",
+      "noInsurance": "No insurance information on file"
+    },
+    "measurements": {
+      "title": "Measurement History",
+      "fullHistory": "Full History →",
+      "latest": "Latest Measurement",
+      "height": "Height",
+      "weight": "Weight",
+      "bmi": "BMI",
+      "noMeasurements": "No measurements recorded yet.",
+      "recordNew": "+ Record New Measurement"
+    }
+  },
+  "measurements": {
+    "title": "{name}'s Measurements",
+    "defaultTitle": "Measurements",
+    "recordsCount": "{total} record{total, plural, =1 {} other {s}}",
+    "recordMeasurement": "Record Measurement",
+    "latestBmi": "Latest BMI",
+    "latestMeasurements": "Latest Measurements",
+    "height": "Height cm",
+    "weight": "Weight kg",
+    "waist": "Waist cm",
+    "hip": "Hip cm",
+    "bmrHb": "BMR (HB)",
+    "bmrMsj": "BMR (MSJ)",
+    "healthyWeight": "Healthy kg",
+    "bmi": "BMI",
+    "tdee": "TDEE Breakdown (Harris-Benedict)",
+    "calorieRequirements": "Clinical Calorie Requirements (Harris-Benedict)",
+    "timeline": "Measurement Timeline",
+    "noMeasurements": "No measurements recorded yet.",
+    "recordFirst": "Record the first measurement →",
+    "toasts": {
+      "loadFailed": "Failed to load data",
+      "saveSuccess": "Measurement recorded successfully",
+      "saveFailed": "Failed to record measurement"
+    },
+    "activity": {
+      "sedentary": "Sedentary",
+      "lightly_active": "Lightly Active",
+      "moderately_active": "Moderately Active",
+      "very_active": "Very Active"
+    }
+  },
+  "form": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "submitting": "Submitting...",
+    "optional": "Optional",
+    "saveChanges": "Save Changes",
+    "createPatient": "Create Patient",
+    "previous": "Previous",
+    "next": "Next",
+    "tabs": {
+      "demographics": "Demographics",
+      "medical": "Medical",
+      "contactAddress": "Contact & Address",
+      "emergencyInsurance": "Emergency & Insurance"
+    },
+    "genderOptions": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "unknown": "Unknown"
+    },
+    "maritalOptions": {
+      "single": "Single",
+      "married": "Married",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "separated": "Separated",
+      "domestic_partnership": "Domestic Partnership",
+      "unknown": "Unknown"
+    },
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "dob": "Date of Birth",
+      "gender": "Gender",
+      "maritalStatus": "Marital Status",
+      "ssn": "SSN Last 4 Digits",
+      "nationalId": "National ID",
+      "bloodType": "Blood Type",
+      "clinicalNotes": "Clinical Notes",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "secondaryPhone": "Secondary Phone",
+      "street1": "Street Line 1",
+      "street2": "Street Line 2",
+      "city": "City",
+      "state": "State / Province",
+      "postal": "Postal Code",
+      "country": "Country",
+      "ecName": "Full Name",
+      "ecRelation": "Relationship",
+      "ecPhone": "Phone Number",
+      "ecEmail": "Email",
+      "insProvider": "Provider Name",
+      "insPolicy": "Policy Number",
+      "insGroup": "Group Number",
+      "insSubscriber": "Subscriber Name",
+      "insSubRel": "Subscriber Relationship",
+      "insEffective": "Effective Date",
+      "insExpiration": "Expiration Date"
+    },
+    "placeholders": {
+      "selectGender": "Select gender",
+      "selectMarital": "Select status",
+      "selectBloodType": "Select blood type",
+      "notes": "Optional notes…",
+      "allergy": "Type allergy and press Enter",
+      "condition": "Type condition and press Enter",
+      "street2": "Apartment, suite, etc."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "all": "All"
+  },
+  "healthPage": {
+    "title": "API Health",
+    "lastChecked": "Last checked: {time} · Auto-refreshes every 10s",
+    "operational": "All Systems Operational",
+    "degraded": "Degraded",
+    "liveness": "Liveness Probe",
+    "readiness": "Readiness Probe",
+    "endpoint": "endpoint",
+    "status": "status",
+    "service": "service",
+    "database": "database",
+    "unreachable": "unreachable",
+    "connectionFailed": "Connection failed — is the API running?"
+  }
+}

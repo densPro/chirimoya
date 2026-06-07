@@ -13,6 +13,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import { validatePatientCreate } from '$lib/utils/validators';
 	import { X } from '@lucide/svelte';
+	import { _ } from 'svelte-i18n';
 
 	interface Props {
 		patient?: PatientResponseDTO;
@@ -24,7 +25,7 @@
 	let { patient, onSave, onCancel, loading = false }: Props = $props();
 
 	// ── Tabs ──────────────────────────────────────────────────────────────────
-	const tabs = ['Demographics', 'Medical', 'Contact & Address', 'Emergency & Insurance'] as const;
+	const tabs = ['demographics', 'medical', 'contactAddress', 'emergencyInsurance'] as const;
 	let activeTab = $state(0);
 
 	// ── Form State ────────────────────────────────────────────────────────────
@@ -97,26 +98,26 @@
 	}
 
 	// ── Select options ────────────────────────────────────────────────────────
-	const genderOptions = [
-		{ value: 'male', label: 'Male' },
-		{ value: 'female', label: 'Female' },
-		{ value: 'non_binary', label: 'Non-binary' },
-		{ value: 'other', label: 'Other' },
-		{ value: 'prefer_not_to_say', label: 'Prefer not to say' },
-		{ value: 'unknown', label: 'Unknown' }
-	];
+	const genderOptions = $derived([
+		{ value: 'male', label: $_('form.genderOptions.male') },
+		{ value: 'female', label: $_('form.genderOptions.female') },
+		{ value: 'non_binary', label: $_('form.genderOptions.non_binary', { default: 'Non-binary' }) },
+		{ value: 'other', label: $_('form.genderOptions.other') },
+		{ value: 'prefer_not_to_say', label: $_('form.genderOptions.prefer_not_to_say', { default: 'Prefer not to say' }) },
+		{ value: 'unknown', label: $_('form.genderOptions.unknown') }
+	]);
 
-	const maritalOptions = [
-		{ value: 'single', label: 'Single' },
-		{ value: 'married', label: 'Married' },
-		{ value: 'divorced', label: 'Divorced' },
-		{ value: 'widowed', label: 'Widowed' },
-		{ value: 'separated', label: 'Separated' },
-		{ value: 'domestic_partner', label: 'Domestic Partner' },
-		{ value: 'unknown', label: 'Unknown' }
-	];
+	const maritalOptions = $derived([
+		{ value: 'single', label: $_('form.maritalOptions.single') },
+		{ value: 'married', label: $_('form.maritalOptions.married') },
+		{ value: 'divorced', label: $_('form.maritalOptions.divorced') },
+		{ value: 'widowed', label: $_('form.maritalOptions.widowed') },
+		{ value: 'separated', label: $_('form.maritalOptions.separated') },
+		{ value: 'domestic_partner', label: $_('form.maritalOptions.domestic_partnership', { default: 'Domestic Partner' }) },
+		{ value: 'unknown', label: $_('form.maritalOptions.unknown') }
+	]);
 
-	const bloodTypeOptions = [
+	const bloodTypeOptions = $derived([
 		{ value: 'A+', label: 'A+' },
 		{ value: 'A-', label: 'A-' },
 		{ value: 'B+', label: 'B+' },
@@ -125,8 +126,8 @@
 		{ value: 'AB-', label: 'AB-' },
 		{ value: 'O+', label: 'O+' },
 		{ value: 'O-', label: 'O-' },
-		{ value: 'unknown', label: 'Unknown' }
-	];
+		{ value: 'unknown', label: $_('patient.medical.unknown') }
+	]);
 
 	// ── Submit ─────────────────────────────────────────────────────────────────
 	async function handleSubmit() {
@@ -206,7 +207,7 @@
 					? 'text-[#D4E79E]'
 					: 'text-[#FDFBF7]/40 hover:text-[#FDFBF7]/70'}"
 			>
-				{tab}
+				{$_('form.tabs.' + tab)}
 				{#if activeTab === i}
 					<span class="absolute bottom-0 left-0 right-0 h-0.5 rounded-t-full bg-[#D4E79E]"></span>
 				{/if}
@@ -219,24 +220,24 @@
 		<!-- Tab 0: Demographics -->
 		{#if activeTab === 0}
 			<div class="grid grid-cols-2 gap-4">
-				<Input id="first_name" label="First Name" bind:value={firstName} required error={errors.first_name} />
-				<Input id="last_name" label="Last Name" bind:value={lastName} required error={errors.last_name} />
-				<Input id="dob" label="Date of Birth" type="date" bind:value={dob} required error={errors.date_of_birth} />
-				<Select id="gender" label="Gender" bind:value={gender} options={genderOptions} placeholder="Select gender" required error={errors.gender} />
-				<Select id="marital_status" label="Marital Status" bind:value={maritalStatus} options={maritalOptions} placeholder="Select status" />
-				<Input id="ssn" label="SSN Last 4 Digits" bind:value={ssnLast4} placeholder="1234" maxlength="4" hint="Optional" />
-				<Input id="national_id" label="National ID" bind:value={nationalId} hint="Optional" class="col-span-2" />
+				<Input id="first_name" label={$_('form.labels.firstName')} bind:value={firstName} required error={errors.first_name} />
+				<Input id="last_name" label={$_('form.labels.lastName')} bind:value={lastName} required error={errors.last_name} />
+				<Input id="dob" label={$_('form.labels.dob')} type="date" bind:value={dob} required error={errors.date_of_birth} />
+				<Select id="gender" label={$_('form.labels.gender')} bind:value={gender} options={genderOptions} placeholder={$_('form.placeholders.selectGender')} required error={errors.gender} />
+				<Select id="marital_status" label={$_('form.labels.maritalStatus')} bind:value={maritalStatus} options={maritalOptions} placeholder={$_('form.placeholders.selectMarital')} />
+				<Input id="ssn" label={$_('form.labels.ssn')} bind:value={ssnLast4} placeholder="1234" maxlength="4" hint={$_('form.optional')} />
+				<Input id="national_id" label={$_('form.labels.nationalId')} bind:value={nationalId} hint={$_('form.optional')} class="col-span-2" />
 			</div>
 		{/if}
 
 		<!-- Tab 1: Medical -->
 		{#if activeTab === 1}
 			<div class="space-y-4">
-				<Select id="blood_type" label="Blood Type" bind:value={bloodType} options={bloodTypeOptions} placeholder="Select blood type" />
+				<Select id="blood_type" label={$_('form.labels.bloodType')} bind:value={bloodType} options={bloodTypeOptions} placeholder={$_('form.placeholders.selectBloodType')} />
 
 				<!-- Allergies tag input -->
 				<div class="space-y-2">
-					<label class="text-sm font-medium text-[#FDFBF7]/80">Allergies</label>
+					<label class="text-sm font-medium text-[#FDFBF7]/80">{$_('patient.medical.allergies')}</label>
 					{#if allergies.length > 0}
 						<div class="flex flex-wrap gap-1.5">
 							{#each allergies as a (a)}
@@ -253,14 +254,14 @@
 						type="text"
 						bind:value={allergiesInput}
 						onkeydown={handleAllergyKey}
-						placeholder="Type allergy and press Enter"
+						placeholder={$_('form.placeholders.allergy')}
 						class="h-9 w-full rounded-lg border border-white/10 bg-[#2C3531] px-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30"
 					/>
 				</div>
 
 				<!-- Chronic conditions tag input -->
 				<div class="space-y-2">
-					<label class="text-sm font-medium text-[#FDFBF7]/80">Chronic Conditions</label>
+					<label class="text-sm font-medium text-[#FDFBF7]/80">{$_('patient.medical.chronicConditions')}</label>
 					{#if conditions.length > 0}
 						<div class="flex flex-wrap gap-1.5">
 							{#each conditions as c (c)}
@@ -277,12 +278,12 @@
 						type="text"
 						bind:value={conditionsInput}
 						onkeydown={handleConditionKey}
-						placeholder="Type condition and press Enter"
+						placeholder={$_('form.placeholders.condition')}
 						class="h-9 w-full rounded-lg border border-white/10 bg-[#2C3531] px-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30"
 					/>
 				</div>
 
-				<Textarea id="notes" label="Clinical Notes" bind:value={notes} rows={4} placeholder="Optional notes…" />
+				<Textarea id="notes" label={$_('form.labels.clinicalNotes')} bind:value={notes} rows={4} placeholder={$_('form.placeholders.notes')} />
 			</div>
 		{/if}
 
@@ -290,22 +291,22 @@
 		{#if activeTab === 2}
 			<div class="space-y-5">
 				<div>
-					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Contact Information</h3>
+					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.contact.title')}</h3>
 					<div class="grid grid-cols-2 gap-4">
-						<Input id="phone" label="Phone Number" type="tel" bind:value={phone} required error={errors.phone_number} />
-						<Input id="email" label="Email Address" type="email" bind:value={email} error={errors.email} hint="Optional" />
-						<Input id="secondary_phone" label="Secondary Phone" type="tel" bind:value={secondaryPhone} hint="Optional" />
+						<Input id="phone" label={$_('form.labels.phone')} type="tel" bind:value={phone} required error={errors.phone_number} />
+						<Input id="email" label={$_('form.labels.email')} type="email" bind:value={email} error={errors.email} hint={$_('form.optional')} />
+						<Input id="secondary_phone" label={$_('form.labels.secondaryPhone')} type="tel" bind:value={secondaryPhone} hint={$_('form.optional')} />
 					</div>
 				</div>
 				<div class="border-t border-white/[0.06] pt-4">
-					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Address (Optional)</h3>
+					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.contact.address')} ({$_('form.optional')})</h3>
 					<div class="grid grid-cols-2 gap-4">
-						<Input id="street1" label="Street Line 1" bind:value={street1} class="col-span-2" />
-						<Input id="street2" label="Street Line 2" bind:value={street2} class="col-span-2" hint="Apartment, suite, etc." />
-						<Input id="city" label="City" bind:value={city} />
-						<Input id="state" label="State / Province" bind:value={state_} />
-						<Input id="postal" label="Postal Code" bind:value={postalCode} />
-						<Input id="country" label="Country" bind:value={country} />
+						<Input id="street1" label={$_('form.labels.street1')} bind:value={street1} class="col-span-2" />
+						<Input id="street2" label={$_('form.labels.street2')} bind:value={street2} class="col-span-2" hint={$_('form.placeholders.street2')} />
+						<Input id="city" label={$_('form.labels.city')} bind:value={city} />
+						<Input id="state" label={$_('form.labels.state')} bind:value={state_} />
+						<Input id="postal" label={$_('form.labels.postal')} bind:value={postalCode} />
+						<Input id="country" label={$_('form.labels.country')} bind:value={country} />
 					</div>
 				</div>
 			</div>
@@ -315,24 +316,24 @@
 		{#if activeTab === 3}
 			<div class="space-y-5">
 				<div>
-					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Emergency Contact (Optional)</h3>
+					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.emergency.title')} ({$_('form.optional')})</h3>
 					<div class="grid grid-cols-2 gap-4">
-						<Input id="ec_name" label="Full Name" bind:value={ecName} class="col-span-2" />
-						<Input id="ec_relation" label="Relationship" bind:value={ecRelation} />
-						<Input id="ec_phone" label="Phone Number" type="tel" bind:value={ecPhone} />
-						<Input id="ec_email" label="Email" type="email" bind:value={ecEmail} hint="Optional" />
+						<Input id="ec_name" label={$_('form.labels.ecName')} bind:value={ecName} class="col-span-2" />
+						<Input id="ec_relation" label={$_('form.labels.ecRelation')} bind:value={ecRelation} />
+						<Input id="ec_phone" label={$_('form.labels.ecPhone')} type="tel" bind:value={ecPhone} />
+						<Input id="ec_email" label={$_('form.labels.ecEmail')} type="email" bind:value={ecEmail} hint={$_('form.optional')} />
 					</div>
 				</div>
 				<div class="border-t border-white/[0.06] pt-4">
-					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">Insurance Information (Optional)</h3>
+					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.insurance.title')} ({$_('form.optional')})</h3>
 					<div class="grid grid-cols-2 gap-4">
-						<Input id="ins_provider" label="Provider Name" bind:value={insProvider} class="col-span-2" />
-						<Input id="ins_policy" label="Policy Number" bind:value={insPolicy} />
-						<Input id="ins_group" label="Group Number" bind:value={insGroup} hint="Optional" />
-						<Input id="ins_subscriber" label="Subscriber Name" bind:value={insSubscriber} hint="Optional" />
-						<Input id="ins_sub_rel" label="Subscriber Relationship" bind:value={insSubRelation} hint="Optional" />
-						<Input id="ins_effective" label="Effective Date" type="date" bind:value={insEffective} hint="Optional" />
-						<Input id="ins_expiration" label="Expiration Date" type="date" bind:value={insExpiration} hint="Optional" />
+						<Input id="ins_provider" label={$_('form.labels.insProvider')} bind:value={insProvider} class="col-span-2" />
+						<Input id="ins_policy" label={$_('form.labels.insPolicy')} bind:value={insPolicy} />
+						<Input id="ins_group" label={$_('form.labels.insGroup')} bind:value={insGroup} hint={$_('form.optional')} />
+						<Input id="ins_subscriber" label={$_('form.labels.insSubscriber')} bind:value={insSubscriber} hint={$_('form.optional')} />
+						<Input id="ins_sub_rel" label={$_('form.labels.insSubRelation')} bind:value={insSubRelation} hint={$_('form.optional')} />
+						<Input id="ins_effective" label={$_('form.labels.insEffective')} type="date" bind:value={insEffective} hint={$_('form.optional')} />
+						<Input id="ins_expiration" label={$_('form.labels.insExpiration')} type="date" bind:value={insExpiration} hint={$_('form.optional')} />
 					</div>
 				</div>
 			</div>
@@ -349,16 +350,16 @@
 	<div class="flex items-center justify-between border-t border-white/[0.06] px-6 py-4">
 		<div class="flex gap-2">
 			{#if activeTab > 0}
-				<Button variant="ghost" onclick={() => activeTab--}>← Previous</Button>
+				<Button variant="ghost" onclick={() => activeTab--}>← {$_('form.previous')}</Button>
 			{/if}
 		</div>
 		<div class="flex items-center gap-3">
-			<Button variant="ghost" onclick={onCancel}>Cancel</Button>
+			<Button variant="ghost" onclick={onCancel}>{$_('form.cancel')}</Button>
 			{#if activeTab < tabs.length - 1}
-				<Button variant="secondary" onclick={() => activeTab++}>Next →</Button>
+				<Button variant="secondary" onclick={() => activeTab++}>{$_('form.next')} →</Button>
 			{:else}
 				<Button variant="primary" {loading} onclick={handleSubmit} type="button">
-					{patient ? 'Save Changes' : 'Create Patient'}
+					{patient ? $_('form.saveChanges') : $_('form.createPatient')}
 				</Button>
 			{/if}
 		</div>

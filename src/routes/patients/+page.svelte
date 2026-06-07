@@ -4,6 +4,7 @@
 	import { addToast } from '$lib/stores/toast.svelte';
 	import type { PatientResponseDTO, PatientUpdateDTO, PatientStatus } from '$lib/types';
 	import PatientTable from '$lib/components/patients/PatientTable.svelte';
+	import { _ } from 'svelte-i18n';
 	import PatientSearchBar from '$lib/components/patients/PatientSearchBar.svelte';
 	import Pagination from '$lib/components/ui/Pagination.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
@@ -33,7 +34,7 @@
 			patients = res.items;
 			total = res.total;
 		} catch (err) {
-			addToast(err instanceof Error ? err.message : 'Failed to load patients', 'error');
+			addToast(err instanceof Error ? err.message : $_('patients.toasts.loadFailed'), 'error');
 		} finally {
 			loading = false;
 		}
@@ -60,12 +61,12 @@
 		editLoading = true;
 		try {
 			await updatePatient(editingPatient.id, dto);
-			addToast('Patient updated successfully', 'success');
+			addToast($_('patients.toasts.updateSuccess'), 'success');
 			editModalOpen = false;
 			editingPatient = undefined;
 			await load();
 		} catch (err) {
-			addToast(err instanceof Error ? err.message : 'Failed to update patient', 'error');
+			addToast(err instanceof Error ? err.message : $_('patients.toasts.updateFailed'), 'error');
 			throw err;
 		} finally {
 			editLoading = false;
@@ -78,14 +79,14 @@
 <div class="space-y-5">
 	<div class="flex items-center justify-between">
 		<div>
-			<h2 class="text-2xl font-bold text-[#FDFBF7]">Patients</h2>
+			<h2 class="text-2xl font-bold text-[#FDFBF7]">{$_('patients.title')}</h2>
 			{#if !loading}
-				<p class="mt-0.5 text-sm text-[#FDFBF7]/40">{total} patient{total !== 1 ? 's' : ''} found</p>
+				<p class="mt-0.5 text-sm text-[#FDFBF7]/40">{$_('patients.found', { values: { total } })}</p>
 			{/if}
 		</div>
 		<Button variant="primary" onclick={() => (window.location.href = '/patients/new')}>
 			<Plus size={16} />
-			New Patient
+			{$_('patients.newPatient')}
 		</Button>
 	</div>
 
@@ -99,8 +100,8 @@
 		</div>
 	{:else if patients.length === 0}
 		<EmptyState
-			title="No patients found"
-			message="Try adjusting your search filters or add a new patient."
+			title={$_('patients.emptyTitle')}
+			message={$_('patients.emptyMessage')}
 			icon="search"
 		/>
 	{:else}
@@ -110,7 +111,7 @@
 </div>
 
 <!-- Edit Modal -->
-<Modal bind:open={editModalOpen} title="Edit Patient" size="xl" onClose={() => (editModalOpen = false)}>
+<Modal bind:open={editModalOpen} title={$_('patients.editPatient')} size="xl" onClose={() => (editModalOpen = false)}>
 	{#if editingPatient}
 		<PatientForm
 			patient={editingPatient}

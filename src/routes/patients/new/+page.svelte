@@ -5,6 +5,7 @@
 	import type { PatientCreateDTO, PatientUpdateDTO } from '$lib/types';
 	import PatientForm from '$lib/components/patients/PatientForm.svelte';
 	import { ArrowLeft } from '@lucide/svelte';
+	import { _ } from 'svelte-i18n';
 
 	let loading = $state(false);
 
@@ -12,10 +13,10 @@
 		loading = true;
 		try {
 			const patient = await createPatient(dto as PatientCreateDTO);
-			addToast(`Patient "${patient.full_name}" created successfully`, 'success');
+			addToast($_('patients.toasts.createSuccess', { values: { name: patient.full_name } }), 'success');
 			await goto(`/patients/${patient.id}`);
 		} catch (err) {
-			addToast(err instanceof Error ? err.message : 'Failed to create patient', 'error');
+			addToast(err instanceof Error ? err.message : $_('patients.toasts.createFailed'), 'error');
 			throw err;
 		} finally {
 			loading = false;
@@ -36,8 +37,8 @@
 			<ArrowLeft size={16} />
 		</a>
 		<div>
-			<h2 class="text-2xl font-bold text-[#FDFBF7]">New Patient</h2>
-			<p class="text-sm text-[#FDFBF7]/40">Register a new patient in the system</p>
+			<h2 class="text-2xl font-bold text-[#FDFBF7]">{$_('patients.newPatient')}</h2>
+			<p class="text-sm text-[#FDFBF7]/40">{$_('patients.registerDescription')}</p>
 		</div>
 	</div>
 

@@ -3,6 +3,7 @@
 	import { getHealth, getReadiness } from '$lib/api';
 	import type { HealthResponseDTO } from '$lib/types';
 	import Spinner from '$lib/components/ui/Spinner.svelte';
+	import { _ } from 'svelte-i18n';
 
 	let health = $state<HealthResponseDTO | null>(null);
 	let readiness = $state<HealthResponseDTO | null>(null);
@@ -47,9 +48,9 @@
 <div class="space-y-5">
 	<div class="flex items-center justify-between">
 		<div>
-			<h2 class="text-2xl font-bold text-[#FDFBF7]">API Health</h2>
+			<h2 class="text-2xl font-bold text-[#FDFBF7]">{$_('healthPage.title')}</h2>
 			{#if lastChecked}
-				<p class="mt-0.5 text-xs text-[#FDFBF7]/30">Last checked: {lastChecked.toLocaleTimeString()} · Auto-refreshes every 10s</p>
+				<p class="mt-0.5 text-xs text-[#FDFBF7]/30">{$_('healthPage.lastChecked', { values: { time: lastChecked.toLocaleTimeString() } })}</p>
 			{/if}
 		</div>
 		{#if loading}
@@ -62,7 +63,7 @@
 						: 'bg-red-400'}"
 				></span>
 				<span class="text-sm font-medium {!healthError && !readinessError ? 'text-[#96c499]' : 'text-red-400'}">
-					{!healthError && !readinessError ? 'All Systems Operational' : 'Degraded'}
+					{!healthError && !readinessError ? $_('healthPage.operational') : $_('healthPage.degraded')}
 				</span>
 			</div>
 		{/if}
@@ -73,7 +74,7 @@
 		<!-- Liveness -->
 		<div class="rounded-xl border bg-[#35403B] p-5 font-mono {healthError ? 'border-red-500/30' : 'border-[#96c499]/20'}">
 			<div class="mb-4 flex items-center justify-between">
-				<span class="text-xs font-semibold uppercase tracking-widest text-[#FDFBF7]/50">Liveness Probe</span>
+				<span class="text-xs font-semibold uppercase tracking-widest text-[#FDFBF7]/50">{$_('healthPage.liveness')}</span>
 				<span
 					class="flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium {healthError
 						? 'bg-red-500/20 text-red-300'
@@ -86,24 +87,24 @@
 
 			<div class="space-y-2 text-sm">
 				<div class="flex justify-between">
-					<span class="text-[#FDFBF7]/40">endpoint</span>
+					<span class="text-[#FDFBF7]/40">{$_('healthPage.endpoint')}</span>
 					<span class="text-[#D4E79E]">GET /health</span>
 				</div>
 				{#if health}
 					<div class="flex justify-between">
-						<span class="text-[#FDFBF7]/40">status</span>
+						<span class="text-[#FDFBF7]/40">{$_('healthPage.status')}</span>
 						<span class="text-[#FDFBF7]">{health.status}</span>
 					</div>
 					{#if health.service}
 						<div class="flex justify-between">
-							<span class="text-[#FDFBF7]/40">service</span>
+							<span class="text-[#FDFBF7]/40">{$_('healthPage.service')}</span>
 							<span class="text-[#FDFBF7]">{health.service}</span>
 						</div>
 					{/if}
 				{:else if healthError}
 					<div class="flex justify-between">
-						<span class="text-[#FDFBF7]/40">status</span>
-						<span class="text-red-400">unreachable</span>
+						<span class="text-[#FDFBF7]/40">{$_('healthPage.status')}</span>
+						<span class="text-red-400">{$_('healthPage.unreachable')}</span>
 					</div>
 				{/if}
 			</div>
@@ -112,7 +113,7 @@
 		<!-- Readiness -->
 		<div class="rounded-xl border bg-[#35403B] p-5 font-mono {readinessError ? 'border-red-500/30' : 'border-[#96c499]/20'}">
 			<div class="mb-4 flex items-center justify-between">
-				<span class="text-xs font-semibold uppercase tracking-widest text-[#FDFBF7]/50">Readiness Probe</span>
+				<span class="text-xs font-semibold uppercase tracking-widest text-[#FDFBF7]/50">{$_('healthPage.readiness')}</span>
 				<span
 					class="flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium {readinessError
 						? 'bg-red-500/20 text-red-300'
@@ -125,24 +126,24 @@
 
 			<div class="space-y-2 text-sm">
 				<div class="flex justify-between">
-					<span class="text-[#FDFBF7]/40">endpoint</span>
+					<span class="text-[#FDFBF7]/40">{$_('healthPage.endpoint')}</span>
 					<span class="text-[#D4E79E]">GET /ready</span>
 				</div>
 				{#if readiness}
 					<div class="flex justify-between">
-						<span class="text-[#FDFBF7]/40">status</span>
+						<span class="text-[#FDFBF7]/40">{$_('healthPage.status')}</span>
 						<span class="text-[#FDFBF7]">{readiness.status}</span>
 					</div>
 					{#if readiness.database}
 						<div class="flex justify-between">
-							<span class="text-[#FDFBF7]/40">database</span>
+							<span class="text-[#FDFBF7]/40">{$_('healthPage.database')}</span>
 							<span class="{readiness.database === 'connected' ? 'text-[#96c499]' : 'text-red-400'}">{readiness.database}</span>
 						</div>
 					{/if}
 				{:else if readinessError}
 					<div class="flex justify-between">
-						<span class="text-[#FDFBF7]/40">status</span>
-						<span class="text-red-400">unreachable</span>
+						<span class="text-[#FDFBF7]/40">{$_('healthPage.status')}</span>
+						<span class="text-red-400">{$_('healthPage.unreachable')}</span>
 					</div>
 				{/if}
 			</div>
@@ -164,7 +165,7 @@
 			{#if health}
 				<p class="text-[#96c499]">{JSON.stringify(health, null, 2)}</p>
 			{:else}
-				<p class="text-red-400">Connection failed — is the API running?</p>
+				<p class="text-red-400">{$_('healthPage.connectionFailed')}</p>
 			{/if}
 		</div>
 	</div>
