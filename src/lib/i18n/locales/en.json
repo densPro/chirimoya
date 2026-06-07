@@ -120,7 +120,8 @@
     "measurements": {
       "title": "Measurement History",
       "fullHistory": "Full History →",
-      "latest": "Latest Measurement",
+      "latestMeasurements": "Latest Measurements",
+      "latestBmi": "Latest BMI",
       "height": "Height",
       "weight": "Weight",
       "bmi": "BMI",

@@ -12,7 +12,7 @@
     "profile": "Perfil"
   },
   "dashboard": {
-    "totalPatients": "Pacientes Totales",
+    "totalPatients": "Pacientes",
     "active": "Activos",
     "inactive": "Inactivos",
     "deceased": "Fallecidos",
@@ -78,7 +78,7 @@
       "dob": "Fecha de Nacimiento",
       "gender": "Género",
       "maritalStatus": "Estado Civil",
-      "ssn": "Últimos 4 SSN",
+      "ssn": "Últimos 4 dígitos del seguro social",
       "nationalId": "Identificación Nacional",
       "registered": "Registrado"
     },
@@ -120,7 +120,8 @@
     "measurements": {
       "title": "Historial de Mediciones",
       "fullHistory": "Historial Completo →",
-      "latest": "Última Medición",
+      "latestMeasurements": "Últimas Mediciones",
+      "latestBmi": "IMC Reciente",
       "height": "Altura",
       "weight": "Peso",
       "bmi": "IMC",

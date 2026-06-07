@@ -223,7 +223,7 @@
 			<!-- Latest BMI -->
 			{#if patient.latest_measurement?.bmi != null}
 				<Card>
-					<h3 class="mb-4 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.measurements.latest')}</h3>
+					<h3 class="mb-4 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.measurements.latestBmi')}</h3>
 					<BMIGauge bmi={patient.latest_measurement.bmi} category={patient.latest_measurement.bmi_category} />
 				</Card>
 			{/if}
@@ -324,7 +324,7 @@
 		</div>
 		{#if patient.latest_measurement}
 			<div class="rounded-xl border border-white/[0.06] bg-[#35403B] p-4">
-				<p class="mb-3 text-xs font-medium uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.measurements.latest')}</p>
+				<p class="mb-3 text-xs font-medium uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.measurements.latestMeasurements')}</p>
 				<div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
 					{#if patient.latest_measurement.height_cm != null}<div class="text-center"><p class="clinical text-base">{patient.latest_measurement.height_cm.toFixed(1)}</p><p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">cm</p></div>{/if}
 					{#if patient.latest_measurement.weight_kg != null}<div class="text-center"><p class="clinical text-base">{patient.latest_measurement.weight_kg.toFixed(2)}</p><p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">kg</p></div>{/if}
