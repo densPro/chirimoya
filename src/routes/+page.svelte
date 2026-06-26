@@ -70,6 +70,10 @@
 </script>
 
 <div class="space-y-6">
+	<div class="mb-3 flex items-center justify-between">
+		<h2 class="text-sm font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('dashboard.recentPatients')}</h2>
+	</div>
+
 	<!-- KPI Cards -->
 	<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
 		{#each kpis as kpi, i (kpi.key)}
