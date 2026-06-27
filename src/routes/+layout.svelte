@@ -18,9 +18,13 @@
 		if (path.match(/\/patients\/[^/]+\/measurements/)) return $_('patient.measurements.title');
 		if (path.match(/\/patients\/[^/]+/)) return $_('patient.profile');
 		if (path === '/patients') return $_('patients.title');
+		if (path.match(/\/doctors\/[^/]+/)) return $_('doctors.profileTitle');
+		if (path === '/doctors') return $_('doctors.title');
+		if (path === '/specialties') return $_('specialties.title');
 		if (path === '/health') return $_('nav.health');
 		return 'Chirimoya';
 	});
+
 </script>
 
 <svelte:head>

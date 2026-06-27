@@ -2,6 +2,8 @@
   "nav": {
     "dashboard": "Tablero",
     "patients": "Pacientes",
+    "doctors": "Médicos",
+    "specialties": "Especialidades",
     "health": "Salud",
     "collapse": "Colapsar",
     "expand": "Expandir",
@@ -13,6 +15,8 @@
   },
   "dashboard": {
     "totalPatients": "Pacientes",
+    "totalDoctors": "Médicos",
+    "activeDoctors": "Médicos Activos",
     "active": "Activos",
     "inactive": "Inactivos",
     "deceased": "Fallecidos",
@@ -25,7 +29,10 @@
     "offline": "Desconectado",
     "quickActions": "Acciones Rápidas",
     "newPatient": "Nuevo Paciente",
+    "newDoctor": "Nuevo Médico",
     "searchPatients": "Buscar Pacientes",
+    "viewDoctors": "Ver Médicos",
+    "viewSpecialties": "Especialidades",
     "healthStatus": "Estado de Salud"
   },
   "patients": {
@@ -250,5 +257,58 @@
     "database": "base de datos",
     "unreachable": "inaccesible",
     "connectionFailed": "Conexión fallida: ¿está la API ejecutándose?"
+  },
+  "specialties": {
+    "title": "Especialidades",
+    "subtitle": "Gestionar el catálogo de especialidades médicas",
+    "new": "Nueva Especialidad",
+    "create": "Crear Especialidad",
+    "createTitle": "Nueva Especialidad",
+    "editTitle": "Editar Especialidad",
+    "activeOnly": "Solo activas",
+    "count": "especialidades",
+    "emptyTitle": "No se encontraron especialidades",
+    "emptyMessage": "Cree la primera especialidad para comenzar.",
+    "columns": {
+      "code": "Código",
+      "name": "Nombre",
+      "category": "Categoría",
+      "status": "Estado",
+      "created": "Creado",
+      "actions": "Acciones"
+    },
+    "toasts": {
+      "loadFailed": "Error al cargar especialidades",
+      "createSuccess": "Especialidad creada con éxito",
+      "updateSuccess": "Especialidad actualizada con éxito",
+      "deactivateSuccess": "Especialidad desactivada"
+    }
+  },
+  "doctors": {
+    "title": "Médicos",
+    "profileTitle": "Perfil del Médico",
+    "subtitle": "Gestionar perfiles de médicos",
+    "new": "Nuevo Médico",
+    "create": "Registrar Médico",
+    "createTitle": "Registrar Nuevo Médico",
+    "editTitle": "Editar Médico",
+    "found": "{total, plural, =0 {Ningún médico} =1 {1 médico} other {{total} médicos}}",
+    "emptyTitle": "No se encontraron médicos",
+    "emptyMessage": "Ajuste los filtros o registre un nuevo médico.",
+    "columns": {
+      "employeeId": "ID Empleado",
+      "name": "Nombre",
+      "specialty": "Especialidad",
+      "status": "Estado",
+      "experience": "Experiencia",
+      "joined": "Registro",
+      "actions": "Acciones"
+    },
+    "toasts": {
+      "loadFailed": "Error al cargar médicos",
+      "createSuccess": "Médico registrado con éxito",
+      "updateSuccess": "Médico actualizado con éxito",
+      "deactivateSuccess": "Médico desactivado"
+    }
   }
 }

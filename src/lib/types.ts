@@ -196,3 +196,128 @@ export interface HealthResponseDTO {
 	service?: string;
 	database?: string;
 }
+
+// ─── Specialty ───────────────────────────────────────────────────────────────
+
+export type SpecialtyCategory =
+	| 'primary_care'
+	| 'surgical'
+	| 'diagnostic'
+	| 'therapeutic'
+	| 'mental_health'
+	| 'emergency'
+	| 'other';
+
+export interface SpecialtyCreateDTO {
+	code: string;
+	name: string;
+	category: SpecialtyCategory;
+	description?: string;
+}
+
+export interface SpecialtyUpdateDTO {
+	name?: string;
+	category?: SpecialtyCategory;
+	description?: string;
+}
+
+export interface SpecialtyResponseDTO {
+	id: string;
+	code: string;
+	name: string;
+	category: SpecialtyCategory;
+	description?: string;
+	is_active: boolean;
+	created_at: string;
+	updated_at: string;
+}
+
+// ─── Doctor ──────────────────────────────────────────────────────────────────
+
+export type DoctorStatus = 'active' | 'inactive' | 'on_leave' | 'retired';
+
+export interface LicenseInfoDTO {
+	license_number: string;
+	issuing_body: string;
+	issue_date?: string;
+	expiration_date?: string;
+	state?: string;
+}
+
+export interface DoctorContactInfoDTO {
+	phone_number?: string;
+	email?: string;
+}
+
+export interface DoctorAddressDTO {
+	street_line_1?: string;
+	street_line_2?: string;
+	city?: string;
+	state?: string;
+	postal_code?: string;
+	country?: string;
+}
+
+export interface DoctorCreateDTO {
+	first_name: string;
+	last_name: string;
+	date_of_birth?: string;
+	gender: Gender;
+	specialty_id: string;
+	license_info?: LicenseInfoDTO;
+	contact_info?: DoctorContactInfoDTO;
+	address?: DoctorAddressDTO;
+	years_of_experience?: number;
+	bio?: string;
+}
+
+export interface DoctorUpdateDTO {
+	first_name?: string;
+	last_name?: string;
+	date_of_birth?: string;
+	gender?: Gender;
+	specialty_id?: string;
+	license_info?: LicenseInfoDTO;
+	contact_info?: DoctorContactInfoDTO;
+	address?: DoctorAddressDTO;
+	years_of_experience?: number;
+	bio?: string;
+	status?: DoctorStatus;
+}
+
+export interface DoctorSearchParams {
+	first_name?: string;
+	last_name?: string;
+	specialty_id?: string;
+	status?: DoctorStatus;
+	limit?: number;
+	offset?: number;
+}
+
+export interface DoctorResponseDTO {
+	id: string;
+	employee_id: string;
+	first_name: string;
+	last_name: string;
+	full_name: string;
+	date_of_birth?: string;
+	age?: number;
+	gender: Gender;
+	specialty_id: string;
+	license_info?: LicenseInfoDTO;
+	contact_info?: DoctorContactInfoDTO;
+	address?: DoctorAddressDTO;
+	years_of_experience?: number;
+	bio?: string;
+	status: DoctorStatus;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface PaginatedDoctorsResponseDTO {
+	items: DoctorResponseDTO[];
+	total: number;
+	limit: number;
+	offset: number;
+}
+

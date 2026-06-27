@@ -8,8 +8,17 @@ import type {
 	BodyMeasurementCreateDTO,
 	BodyMeasurementResponseDTO,
 	PaginatedMeasurementsResponseDTO,
-	HealthResponseDTO
+	HealthResponseDTO,
+	SpecialtyCreateDTO,
+	SpecialtyUpdateDTO,
+	SpecialtyResponseDTO,
+	DoctorCreateDTO,
+	DoctorUpdateDTO,
+	DoctorResponseDTO,
+	DoctorSearchParams,
+	PaginatedDoctorsResponseDTO
 } from './types';
+
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';
 
@@ -124,3 +133,80 @@ export function getHealth(): Promise<HealthResponseDTO> {
 export function getReadiness(): Promise<HealthResponseDTO> {
 	return request<HealthResponseDTO>('/ready');
 }
+
+// ─── Specialties ─────────────────────────────────────────────────────────────
+
+export function listSpecialties(activeOnly = false): Promise<SpecialtyResponseDTO[]> {
+	return request<SpecialtyResponseDTO[]>(`/api/v1/specialties?active_only=${activeOnly}`);
+}
+
+export function getSpecialtyById(id: string): Promise<SpecialtyResponseDTO> {
+	return request<SpecialtyResponseDTO>(`/api/v1/specialties/${id}`);
+}
+
+export function getSpecialtyByCode(code: string): Promise<SpecialtyResponseDTO> {
+	return request<SpecialtyResponseDTO>(`/api/v1/specialties/code/${code}`);
+}
+
+export function createSpecialty(dto: SpecialtyCreateDTO): Promise<SpecialtyResponseDTO> {
+	return request<SpecialtyResponseDTO>('/api/v1/specialties', {
+		method: 'POST',
+		body: JSON.stringify(dto)
+	});
+}
+
+export function updateSpecialty(
+	id: string,
+	dto: SpecialtyUpdateDTO
+): Promise<SpecialtyResponseDTO> {
+	return request<SpecialtyResponseDTO>(`/api/v1/specialties/${id}`, {
+		method: 'PATCH',
+		body: JSON.stringify(dto)
+	});
+}
+
+export function deactivateSpecialty(id: string): Promise<SpecialtyResponseDTO> {
+	return request<SpecialtyResponseDTO>(`/api/v1/specialties/${id}`, { method: 'DELETE' });
+}
+
+// ─── Doctors ─────────────────────────────────────────────────────────────────
+
+export function searchDoctors(
+	params: DoctorSearchParams = {}
+): Promise<PaginatedDoctorsResponseDTO> {
+	const qs = new URLSearchParams();
+	if (params.first_name) qs.set('first_name', params.first_name);
+	if (params.last_name) qs.set('last_name', params.last_name);
+	if (params.specialty_id) qs.set('specialty_id', params.specialty_id);
+	if (params.status) qs.set('status', params.status);
+	qs.set('limit', String(params.limit ?? 20));
+	qs.set('offset', String(params.offset ?? 0));
+	return request<PaginatedDoctorsResponseDTO>(`/api/v1/doctors?${qs.toString()}`);
+}
+
+export function getDoctorById(id: string): Promise<DoctorResponseDTO> {
+	return request<DoctorResponseDTO>(`/api/v1/doctors/${id}`);
+}
+
+export function getDoctorByEmployeeId(employeeId: string): Promise<DoctorResponseDTO> {
+	return request<DoctorResponseDTO>(`/api/v1/doctors/emp/${employeeId}`);
+}
+
+export function createDoctor(dto: DoctorCreateDTO): Promise<DoctorResponseDTO> {
+	return request<DoctorResponseDTO>('/api/v1/doctors', {
+		method: 'POST',
+		body: JSON.stringify(dto)
+	});
+}
+
+export function updateDoctor(id: string, dto: DoctorUpdateDTO): Promise<DoctorResponseDTO> {
+	return request<DoctorResponseDTO>(`/api/v1/doctors/${id}`, {
+		method: 'PATCH',
+		body: JSON.stringify(dto)
+	});
+}
+
+export function deactivateDoctor(id: string): Promise<DoctorResponseDTO> {
+	return request<DoctorResponseDTO>(`/api/v1/doctors/${id}`, { method: 'DELETE' });
+}
+

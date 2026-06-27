@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { LayoutDashboard, Users, HeartPulse, ChevronLeft, ChevronRight, Leaf } from '@lucide/svelte';
+	import { LayoutDashboard, Users, HeartPulse, ChevronLeft, ChevronRight, Leaf, Stethoscope, Tags } from '@lucide/svelte';
 	import { _ } from 'svelte-i18n';
 
 	interface Props {
@@ -12,6 +12,8 @@
 	const navItems = [
 		{ href: '/', key: 'dashboard', icon: LayoutDashboard },
 		{ href: '/patients', key: 'patients', icon: Users },
+		{ href: '/doctors', key: 'doctors', icon: Stethoscope },
+		{ href: '/specialties', key: 'specialties', icon: Tags },
 		{ href: '/health', key: 'health', icon: HeartPulse }
 	];
 

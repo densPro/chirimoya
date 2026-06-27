@@ -2,6 +2,8 @@
   "nav": {
     "dashboard": "Dashboard",
     "patients": "Patients",
+    "doctors": "Doctors",
+    "specialties": "Specialties",
     "health": "Health",
     "collapse": "Collapse",
     "expand": "Expand",
@@ -13,6 +15,8 @@
   },
   "dashboard": {
     "totalPatients": "Total Patients",
+    "totalDoctors": "Total Doctors",
+    "activeDoctors": "Active Doctors",
     "active": "Active",
     "inactive": "Inactive",
     "deceased": "Deceased",
@@ -25,7 +29,10 @@
     "offline": "Offline",
     "quickActions": "Quick Actions",
     "newPatient": "New Patient",
+    "newDoctor": "New Doctor",
     "searchPatients": "Search Patients",
+    "viewDoctors": "View Doctors",
+    "viewSpecialties": "Specialties",
     "healthStatus": "Health Status"
   },
   "patients": {
@@ -250,5 +257,58 @@
     "database": "database",
     "unreachable": "unreachable",
     "connectionFailed": "Connection failed — is the API running?"
+  },
+  "specialties": {
+    "title": "Specialties",
+    "subtitle": "Manage medical specialty catalogue",
+    "new": "New Specialty",
+    "create": "Create Specialty",
+    "createTitle": "New Specialty",
+    "editTitle": "Edit Specialty",
+    "activeOnly": "Active only",
+    "count": "specialties",
+    "emptyTitle": "No specialties found",
+    "emptyMessage": "Create the first specialty to get started.",
+    "columns": {
+      "code": "Code",
+      "name": "Name",
+      "category": "Category",
+      "status": "Status",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "toasts": {
+      "loadFailed": "Failed to load specialties",
+      "createSuccess": "Specialty created successfully",
+      "updateSuccess": "Specialty updated successfully",
+      "deactivateSuccess": "Specialty deactivated"
+    }
+  },
+  "doctors": {
+    "title": "Doctors",
+    "profileTitle": "Doctor Profile",
+    "subtitle": "Manage physician profiles",
+    "new": "New Doctor",
+    "create": "Register Doctor",
+    "createTitle": "Register New Doctor",
+    "editTitle": "Edit Doctor",
+    "found": "{total} doctor{total, plural, =1 {} other {s}} found",
+    "emptyTitle": "No doctors found",
+    "emptyMessage": "Try adjusting your search filters or register a new doctor.",
+    "columns": {
+      "employeeId": "Employee ID",
+      "name": "Name",
+      "specialty": "Specialty",
+      "status": "Status",
+      "experience": "Experience",
+      "joined": "Joined",
+      "actions": "Actions"
+    },
+    "toasts": {
+      "loadFailed": "Failed to load doctors",
+      "createSuccess": "Doctor registered successfully",
+      "updateSuccess": "Doctor updated successfully",
+      "deactivateSuccess": "Doctor deactivated"
+    }
   }
 }

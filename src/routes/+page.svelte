@@ -1,27 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { searchPatients, getHealth } from '$lib/api';
+	import { searchPatients, getHealth, searchDoctors } from '$lib/api';
 	import type { PatientResponseDTO, HealthResponseDTO } from '$lib/types';
 	import PatientCard from '$lib/components/patients/PatientCard.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Spinner from '$lib/components/ui/Spinner.svelte';
-	import { Users, UserCheck, UserX, Skull, Activity } from '@lucide/svelte';
+	import { Users, UserCheck, UserX, Skull, Activity, Stethoscope } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 	import { _ } from 'svelte-i18n';
-
-	interface KPI {
-		key: string;
-		value: number | null;
-		icon: typeof Users;
-		color: string;
-		status?: string;
-	}
 
 	let kpis = $state<{ key: string; value: number | null; icon: typeof Users; color: string }[]>([
 		{ key: 'totalPatients', value: null, icon: Users, color: '#D4E79E' },
 		{ key: 'active', value: null, icon: UserCheck, color: '#96c499' },
 		{ key: 'inactive', value: null, icon: UserX, color: '#8fa49c' },
-		{ key: 'deceased', value: null, icon: Skull, color: '#f87171' }
+		{ key: 'deceased', value: null, icon: Skull, color: '#f87171' },
+		{ key: 'totalDoctors', value: null, icon: Stethoscope, color: '#60a5fa' },
+		{ key: 'activeDoctors', value: null, icon: Stethoscope, color: '#34d399' }
 	]);
 
 	let recentPatients = $state<PatientResponseDTO[]>([]);
@@ -33,16 +27,20 @@
 	onMount(async () => {
 		// Load KPIs in parallel
 		try {
-			const [total, active, inactive, deceased] = await Promise.all([
+			const [total, active, inactive, deceased, totalDocs, activeDocs] = await Promise.all([
 				searchPatients({ limit: 1 }),
 				searchPatients({ status: 'active', limit: 1 }),
 				searchPatients({ status: 'inactive', limit: 1 }),
-				searchPatients({ status: 'deceased', limit: 1 })
+				searchPatients({ status: 'deceased', limit: 1 }),
+				searchDoctors({ limit: 1 }),
+				searchDoctors({ status: 'active', limit: 1 })
 			]);
 			kpis[0].value = total.total;
 			kpis[1].value = active.total;
 			kpis[2].value = inactive.total;
 			kpis[3].value = deceased.total;
+			kpis[4].value = totalDocs.total;
+			kpis[5].value = activeDocs.total;
 		} catch {
 			// silent
 		} finally {
@@ -69,13 +67,14 @@
 	});
 </script>
 
+
 <div class="space-y-6">
 	<div class="mb-3 flex items-center justify-between">
 		<h2 class="text-sm font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('dashboard.recentPatients')}</h2>
 	</div>
 
 	<!-- KPI Cards -->
-	<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+	<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
 		{#each kpis as kpi, i (kpi.key)}
 			<Card class="fade-in" style="animation-delay: {i * 60}ms">
 				<div class="flex items-center justify-between">
@@ -150,7 +149,7 @@
 					{/if}
 				</div>
 				{#if health}
-					<p class="mt-2 font-mono text-xs text-[#FDFBF7]/30">{health.service ?? 'patient-service'}</p>
+					<p class="mt-2 font-mono text-xs text-[#FDFBF7]/30">{health.service ?? 'patient-management-service'}</p>
 				{/if}
 			</Card>
 
@@ -164,6 +163,20 @@
 					>
 						<span class="text-base">+</span>
 						{$_('dashboard.newPatient')}
+					</a>
+					<a
+						href="/doctors"
+						class="flex items-center gap-3 rounded-lg border border-[#60a5fa]/20 bg-[#60a5fa]/5 px-3 py-2.5 text-sm font-medium text-[#60a5fa] transition-all hover:bg-[#60a5fa]/10"
+					>
+						<span class="text-base">🩺</span>
+						{$_('dashboard.viewDoctors')}
+					</a>
+					<a
+						href="/specialties"
+						class="flex items-center gap-3 rounded-lg border border-white/10 px-3 py-2.5 text-sm font-medium text-[#FDFBF7]/60 transition-all hover:border-white/20 hover:text-[#FDFBF7]"
+					>
+						<span class="text-base">🏷️</span>
+						{$_('dashboard.viewSpecialties')}
 					</a>
 					<a
 						href="/patients"
@@ -184,3 +197,4 @@
 		</div>
 	</div>
 </div>
+
