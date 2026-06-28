@@ -50,7 +50,7 @@
 	}
 
 	async function handleDeactivate() {
-		if (!confirm(`Deactivate Dr. ${doctor.full_name}?`)) return;
+		if (!confirm(`¿Desactivar al Dr. ${doctor.full_name}?`)) return;
 		try {
 			doctor = await deactivateDoctor(doctor.id);
 			addToast($_('doctors.toasts.deactivateSuccess'), 'success');
@@ -113,13 +113,13 @@
 				{#if doctor.status === 'active'}
 					<Button variant="danger" onclick={handleDeactivate} id="deactivate-doctor-btn">
 						<PowerOff size={14} />
-						Deactivate
+						{$_('common.deactivate')}
 					</Button>
 				{/if}
 			</div>
 		</div>
 	</Card>
-
+ 
 	<!-- Tabs -->
 	<div class="flex gap-1 rounded-xl bg-black/20 p-1">
 		{#each tabs as tab}
@@ -130,7 +130,7 @@
 						? 'bg-[#D4E79E]/10 text-[#D4E79E]'
 						: 'text-[#FDFBF7]/40 hover:text-[#FDFBF7]/70'}"
 			>
-				{tab.label}
+				{$_('form.tabs.' + tab.key)}
 			</button>
 		{/each}
 	</div>

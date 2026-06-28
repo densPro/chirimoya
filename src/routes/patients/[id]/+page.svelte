@@ -111,7 +111,7 @@
 										: 'bg-white/10 text-[#FDFBF7]/60'
 								: 'text-[#FDFBF7]/30 hover:text-[#FDFBF7]/60'}"
 						>
-							{$_('dashboard.' + s)}
+							{$_('status.' + s)}
 						</button>
 					{/each}
 				</div>

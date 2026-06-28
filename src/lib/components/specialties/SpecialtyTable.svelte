@@ -51,11 +51,11 @@
 						{#if s.is_active}
 							<span class="inline-flex items-center gap-1 rounded-full border border-[#96C499]/30 bg-[#96C499]/10 px-2.5 py-0.5 text-xs font-medium text-[#96C499]">
 								<span class="h-1.5 w-1.5 rounded-full bg-[#96C499]"></span>
-								Active
+								{$_('status.active')}
 							</span>
 						{:else}
 							<span class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium text-[#FDFBF7]/40">
-								Inactive
+								{$_('status.inactive')}
 							</span>
 						{/if}
 					</td>

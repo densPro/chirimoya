@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { DoctorStatus } from '$lib/types';
+	import { _ } from 'svelte-i18n';
 
 	interface Props {
 		status: DoctorStatus;
@@ -8,11 +9,11 @@
 
 	let { status, size = 'sm' }: Props = $props();
 
-	const config: Record<DoctorStatus, { label: string; color: string; bg: string; border: string; dot: string }> = {
-		active:   { label: 'Active',    color: '#96C499', bg: 'rgba(150,196,153,0.15)', border: 'rgba(150,196,153,0.30)', dot: '#96C499' },
-		inactive: { label: 'Inactive',  color: '#FDFBF7', bg: 'rgba(253,251,247,0.06)', border: 'rgba(253,251,247,0.12)', dot: '#FDFBF7' },
-		on_leave: { label: 'On Leave',  color: '#fbbf24', bg: 'rgba(251,191,36,0.12)',  border: 'rgba(251,191,36,0.25)',  dot: '#fbbf24' },
-		retired:  { label: 'Retired',   color: '#94a3b8', bg: 'rgba(148,163,184,0.12)', border: 'rgba(148,163,184,0.25)', dot: '#94a3b8' }
+	const config: Record<DoctorStatus, { color: string; bg: string; border: string; dot: string }> = {
+		active:   { color: '#96C499', bg: 'rgba(150,196,153,0.15)', border: 'rgba(150,196,153,0.30)', dot: '#96C499' },
+		inactive: { color: '#FDFBF7', bg: 'rgba(253,251,247,0.06)', border: 'rgba(253,251,247,0.12)', dot: '#FDFBF7' },
+		on_leave: { color: '#fbbf24', bg: 'rgba(251,191,36,0.12)',  border: 'rgba(251,191,36,0.25)',  dot: '#fbbf24' },
+		retired:  { color: '#94a3b8', bg: 'rgba(148,163,184,0.12)', border: 'rgba(148,163,184,0.25)', dot: '#94a3b8' }
 	};
 
 	const cfg = $derived(config[status] ?? config.inactive);
@@ -30,5 +31,5 @@
 	"
 >
 	<span style="width: 5px; height: 5px; border-radius: 50%; background: {cfg.dot};"></span>
-	{cfg.label}
+	{$_('status.' + status)}
 </span>

@@ -59,21 +59,21 @@
 	let errors = $state<Record<string, string>>({});
 
 	// ── Options ───────────────────────────────────────────────────────────────
-	const genderOptions: { value: Gender; label: string }[] = [
-		{ value: 'male',              label: 'Male'            },
-		{ value: 'female',            label: 'Female'          },
-		{ value: 'non_binary',        label: 'Non-Binary'      },
-		{ value: 'other',             label: 'Other'           },
-		{ value: 'prefer_not_to_say', label: 'Prefer not say'  },
-		{ value: 'unknown',           label: 'Unknown'         }
-	];
+	const genderOptions = $derived([
+		{ value: 'male' as Gender,              label: $_('form.genderOptions.male') },
+		{ value: 'female' as Gender,            label: $_('form.genderOptions.female') },
+		{ value: 'non_binary' as Gender,        label: $_('form.genderOptions.non_binary', { default: 'Non-Binary' }) },
+		{ value: 'other' as Gender,             label: $_('form.genderOptions.other') },
+		{ value: 'prefer_not_to_say' as Gender, label: $_('form.genderOptions.prefer_not_to_say', { default: 'Prefer not to say' }) },
+		{ value: 'unknown' as Gender,           label: $_('form.genderOptions.unknown') }
+	]);
 
-	const statusOptions: { value: DoctorStatus; label: string }[] = [
-		{ value: 'active',   label: 'Active'   },
-		{ value: 'inactive', label: 'Inactive' },
-		{ value: 'on_leave', label: 'On Leave' },
-		{ value: 'retired',  label: 'Retired'  }
-	];
+	const statusOptions = $derived([
+		{ value: 'active' as DoctorStatus,   label: $_('status.active')   },
+		{ value: 'inactive' as DoctorStatus, label: $_('status.inactive') },
+		{ value: 'on_leave' as DoctorStatus, label: $_('status.on_leave') },
+		{ value: 'retired' as DoctorStatus,  label: $_('status.retired')  }
+	]);
 
 	const specialtyOptions = $derived(
 		specialties.filter(s => s.is_active || s.id === doctor?.specialty_id)
@@ -162,7 +162,7 @@
 					? 'bg-[#D4E79E]/10 text-[#D4E79E]'
 					: 'text-[#FDFBF7]/40 hover:text-[#FDFBF7]/70'}"
 		>
-			{tab.label}
+			{$_('form.tabs.' + tab.key)}
 		</button>
 	{/each}
 </div>

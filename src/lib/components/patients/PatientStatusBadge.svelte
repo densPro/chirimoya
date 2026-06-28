@@ -1,19 +1,17 @@
 <script lang="ts">
 	import type { PatientStatus } from '$lib/types';
+	import { _ } from 'svelte-i18n';
 
 	let { status }: { status: PatientStatus } = $props();
 
-	const config: Record<PatientStatus, { label: string; classes: string }> = {
+	const config: Record<PatientStatus, { classes: string }> = {
 		active: {
-			label: 'Active',
 			classes: 'bg-[#96C499]/20 text-[#96C499] border-[#96C499]/30'
 		},
 		inactive: {
-			label: 'Inactive',
 			classes: 'bg-white/5 text-[#FDFBF7]/50 border-white/10'
 		},
 		deceased: {
-			label: 'Deceased',
 			classes: 'bg-red-500/20 text-red-300 border-red-500/30'
 		}
 	};
@@ -29,5 +27,5 @@
 				? 'bg-red-400'
 				: 'bg-[#FDFBF7]/30'}"
 	></span>
-	{c.label}
+	{$_('status.' + status)}
 </span>

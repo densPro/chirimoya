@@ -182,7 +182,10 @@
       "demographics": "Demographics",
       "medical": "Medical",
       "contactAddress": "Contact & Address",
-      "emergencyInsurance": "Emergency & Insurance"
+      "emergencyInsurance": "Emergency & Insurance",
+      "professional": "Professional",
+      "contact": "Contact",
+      "overview": "Overview"
     },
     "genderOptions": {
       "male": "Male",
@@ -242,7 +245,10 @@
   },
   "common": {
     "loading": "Loading...",
-    "all": "All"
+    "all": "All",
+    "deactivate": "Deactivate",
+    "reactivate": "Reactivate",
+    "edit": "Edit"
   },
   "healthPage": {
     "title": "API Health",
@@ -292,6 +298,8 @@
     "create": "Register Doctor",
     "createTitle": "Register New Doctor",
     "editTitle": "Edit Doctor",
+    "allStatuses": "All Statuses",
+    "allSpecialties": "All Specialties",
     "found": "{total} doctor{total, plural, =1 {} other {s}} found",
     "emptyTitle": "No doctors found",
     "emptyMessage": "Try adjusting your search filters or register a new doctor.",
@@ -310,5 +318,12 @@
       "updateSuccess": "Doctor updated successfully",
       "deactivateSuccess": "Doctor deactivated"
     }
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "deceased": "Deceased",
+    "on_leave": "On Leave",
+    "retired": "Retired"
   }
 }

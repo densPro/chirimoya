@@ -50,17 +50,17 @@
 	);
 
 	const specialtyOptions = $derived([
-		{ value: '', label: 'All Specialties' },
+		{ value: '', label: $_('doctors.allSpecialties') },
 		...specialties.map((s) => ({ value: s.id, label: s.name }))
 	]);
 
-	const statusOptions: { value: string; label: string }[] = [
-		{ value: '',         label: 'All Statuses' },
-		{ value: 'active',   label: 'Active'        },
-		{ value: 'inactive', label: 'Inactive'      },
-		{ value: 'on_leave', label: 'On Leave'      },
-		{ value: 'retired',  label: 'Retired'        }
-	];
+	const statusOptions = $derived([
+		{ value: '',         label: $_('doctors.allStatuses') },
+		{ value: 'active',   label: $_('status.active')        },
+		{ value: 'inactive', label: $_('status.inactive')      },
+		{ value: 'on_leave', label: $_('status.on_leave')      },
+		{ value: 'retired',  label: $_('status.retired')        }
+	]);
 
 	// ── Data loading ──────────────────────────────────────────────────────────
 	async function fetchDoctors() {
@@ -119,7 +119,7 @@
 	}
 
 	async function handleDeactivate(d: DoctorResponseDTO) {
-		if (!confirm(`Deactivate Dr. ${d.full_name}? They will be set to inactive.`)) return;
+		if (!confirm(`¿Desactivar al Dr. ${d.full_name}? Se cambiará su estado a inactivo.`)) return;
 		try {
 			await deactivateDoctor(d.id);
 			addToast($_('doctors.toasts.deactivateSuccess'), 'success');
@@ -158,7 +158,7 @@
 					type="text"
 					bind:value={searchFirst}
 					oninput={onSearchInput}
-					placeholder="First name…"
+					placeholder={$_('form.labels.firstName') + '…'}
 					class="h-9 w-full rounded-lg border border-white/10 bg-[#2C3531] px-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30"
 				/>
 			</div>
@@ -167,7 +167,7 @@
 				type="text"
 				bind:value={searchLast}
 				oninput={onSearchInput}
-				placeholder="Last name…"
+				placeholder={$_('form.labels.lastName') + '…'}
 				class="h-9 rounded-lg border border-white/10 bg-[#2C3531] px-3 text-sm text-[#FDFBF7] placeholder-[#FDFBF7]/30 outline-none focus:border-[#D4E79E]/40 focus:ring-1 focus:ring-[#D4E79E]/30"
 			/>
 			<select

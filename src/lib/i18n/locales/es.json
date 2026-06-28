@@ -182,7 +182,10 @@
       "demographics": "Datos Demográficos",
       "medical": "Datos Médicos",
       "contactAddress": "Contacto y Dirección",
-      "emergencyInsurance": "Emergencia y Seguro"
+      "emergencyInsurance": "Emergencia y Seguro",
+      "professional": "Datos Profesionales",
+      "contact": "Contacto",
+      "overview": "Resumen"
     },
     "genderOptions": {
       "male": "Masculino",
@@ -242,7 +245,10 @@
   },
   "common": {
     "loading": "Cargando...",
-    "all": "Todos"
+    "all": "Todos",
+    "deactivate": "Desactivar",
+    "reactivate": "Reactivar",
+    "edit": "Editar"
   },
   "healthPage": {
     "title": "Estado de la API",
@@ -292,6 +298,8 @@
     "create": "Registrar Médico",
     "createTitle": "Registrar Nuevo Médico",
     "editTitle": "Editar Médico",
+    "allStatuses": "Todos los Estados",
+    "allSpecialties": "Todas las Especialidades",
     "found": "{total, plural, =0 {Ningún médico} =1 {1 médico} other {{total} médicos}}",
     "emptyTitle": "No se encontraron médicos",
     "emptyMessage": "Ajuste los filtros o registre un nuevo médico.",
@@ -310,5 +318,12 @@
       "updateSuccess": "Médico actualizado con éxito",
       "deactivateSuccess": "Médico desactivado"
     }
+  },
+  "status": {
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "deceased": "Fallecido",
+    "on_leave": "En Licencia",
+    "retired": "Jubilado"
   }
 }
