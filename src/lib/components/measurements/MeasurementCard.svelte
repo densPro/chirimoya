@@ -2,6 +2,7 @@
 	import type { BodyMeasurementResponseDTO } from '$lib/types';
 	import { formatDate, formatBMI, formatWeight, formatHeight, formatCalories } from '$lib/utils/formatters';
 	import Card from '$lib/components/ui/Card.svelte';
+	import { _ } from 'svelte-i18n';
 
 	let { measurement }: { measurement: BodyMeasurementResponseDTO } = $props();
 </script>
@@ -34,25 +35,25 @@
 		{#if measurement.bmi != null}
 			<div class="text-center">
 				<p class="clinical text-lg">{formatBMI(measurement.bmi)}</p>
-				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">BMI</p>
+				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">{$_('measurements.bmi')}</p>
 			</div>
 		{/if}
 		{#if measurement.waist_cm != null}
 			<div class="text-center">
 				<p class="clinical text-lg">{measurement.waist_cm.toFixed(1)}</p>
-				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">Waist cm</p>
+				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">{$_('measurements.waist')}</p>
 			</div>
 		{/if}
 		{#if measurement.hip_cm != null}
 			<div class="text-center">
 				<p class="clinical text-lg">{measurement.hip_cm.toFixed(1)}</p>
-				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">Hip cm</p>
+				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">{$_('measurements.hip')}</p>
 			</div>
 		{/if}
 		{#if measurement.bmr_harris_benedict != null}
 			<div class="text-center">
 				<p class="clinical text-lg">{measurement.bmr_harris_benedict.toFixed(0)}</p>
-				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">BMR kcal</p>
+				<p class="text-[10px] uppercase tracking-wide text-[#FDFBF7]/40">{$_('measurements.bmrKcal')}</p>
 			</div>
 		{/if}
 	</div>

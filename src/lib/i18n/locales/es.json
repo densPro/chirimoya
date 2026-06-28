@@ -156,6 +156,19 @@
     "timeline": "Cronología de Mediciones",
     "noMeasurements": "No hay mediciones registradas aún.",
     "recordFirst": "Registrar la primera medición →",
+    "condition": "Condición",
+    "formula": "Fórmula",
+    "valuesKcalDay": "Valores en kcal/día",
+    "tdeeComparison": "Comparación TDEE (Medición Reciente)",
+    "timelineTab": "Línea de Tiempo",
+    "tdeeChartTab": "Gráfico TDEE",
+    "bmrKcal": "TMB kcal",
+    "recordInstruction": "Registre un nuevo historial de mediciones corporales. Se requiere al menos un valor de medición.",
+    "heightLabel": "Altura (cm)",
+    "weightLabel": "Peso (kg)",
+    "waistLabel": "Cintura (cm)",
+    "hipLabel": "Cadera (cm)",
+    "measuredAtLabel": "Medido el",
     "toasts": {
       "loadFailed": "Error al cargar datos",
       "saveSuccess": "Medición registrada con éxito",
@@ -169,6 +182,19 @@
       "lightly_active": "Ligeramente Activo",
       "moderately_active": "Moderadamente Activo",
       "very_active": "Muy Activo"
+    },
+    "conditions": {
+      "major_surgery": "Cirugía Mayor",
+      "minor_surgery": "Cirugía Menor",
+      "mild_infection": "Infección Leve",
+      "moderate_infection": "Infección Moderada",
+      "severe_infection": "Infección Grave",
+      "trauma_with_impaired_consciousness": "Trauma con Pérdida de Conciencia",
+      "burns_40_tbsa": "Quemaduras 40% SCT",
+      "burns_100_tbsa": "Quemaduras 100% SCT",
+      "cancer": "Cáncer",
+      "malnutrition": "Desnutrición",
+      "traumatic_brain_injury": "Traumatismo Craneoencefálico"
     }
   },
   "form": {

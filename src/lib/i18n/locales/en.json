@@ -156,6 +156,19 @@
     "timeline": "Measurement Timeline",
     "noMeasurements": "No measurements recorded yet.",
     "recordFirst": "Record the first measurement →",
+    "condition": "Condition",
+    "formula": "Formula",
+    "valuesKcalDay": "Values in kcal/day",
+    "tdeeComparison": "TDEE Comparison (Latest Measurement)",
+    "timelineTab": "Timeline",
+    "tdeeChartTab": "TDEE Chart",
+    "bmrKcal": "BMR kcal",
+    "recordInstruction": "Record a new body measurement snapshot. At least one measurement value is required.",
+    "heightLabel": "Height (cm)",
+    "weightLabel": "Weight (kg)",
+    "waistLabel": "Waist (cm)",
+    "hipLabel": "Hip (cm)",
+    "measuredAtLabel": "Measured At",
     "toasts": {
       "loadFailed": "Failed to load data",
       "saveSuccess": "Measurement recorded successfully",
@@ -169,6 +182,19 @@
       "lightly_active": "Lightly Active",
       "moderately_active": "Moderately Active",
       "very_active": "Very Active"
+    },
+    "conditions": {
+      "major_surgery": "Major Surgery",
+      "minor_surgery": "Minor Surgery",
+      "mild_infection": "Mild Infection",
+      "moderate_infection": "Moderate Infection",
+      "severe_infection": "Severe Infection",
+      "trauma_with_impaired_consciousness": "Trauma w/ Impaired Consciousness",
+      "burns_40_tbsa": "Burns 40% TBSA",
+      "burns_100_tbsa": "Burns 100% TBSA",
+      "cancer": "Cancer",
+      "malnutrition": "Malnutrition",
+      "traumatic_brain_injury": "Traumatic Brain Injury"
     }
   },
   "form": {

@@ -3,6 +3,7 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { validateMeasurementCreate } from '$lib/utils/validators';
+	import { _ } from 'svelte-i18n';
 
 	interface Props {
 		onSave: (dto: BodyMeasurementCreateDTO) => Promise<void>;
@@ -43,14 +44,14 @@
 				measured_at: measuredAt ? new Date(measuredAt).toISOString() : undefined
 			});
 		} catch (err) {
-			globalError = err instanceof Error ? err.message : 'Failed to record measurement';
+			globalError = err instanceof Error ? err.message : $_('measurements.toasts.saveFailed');
 		}
 	}
 </script>
 
 <div class="space-y-5 p-6">
 	<p class="text-sm text-[#FDFBF7]/50">
-		Record a new body measurement snapshot. At least one measurement value is required.
+		{$_('measurements.recordInstruction')}
 	</p>
 
 	{#if errors.general}
@@ -62,39 +63,39 @@
 	<div class="grid grid-cols-2 gap-4">
 		<Input
 			id="height_cm"
-			label="Height (cm)"
+			label={$_('measurements.heightLabel')}
 			type="number"
 			bind:value={heightCm}
 			placeholder="e.g. 165"
-			hint="Optional"
+			hint={$_('form.optional')}
 		/>
 		<Input
 			id="weight_kg"
-			label="Weight (kg)"
+			label={$_('measurements.weightLabel')}
 			type="number"
 			bind:value={weightKg}
 			placeholder="e.g. 70.5"
-			hint="Optional"
+			hint={$_('form.optional')}
 		/>
 		<Input
 			id="waist_cm"
-			label="Waist (cm)"
+			label={$_('measurements.waistLabel')}
 			type="number"
 			bind:value={waistCm}
 			placeholder="e.g. 85"
-			hint="Optional"
+			hint={$_('form.optional')}
 		/>
 		<Input
 			id="hip_cm"
-			label="Hip (cm)"
+			label={$_('measurements.hipLabel')}
 			type="number"
 			bind:value={hipCm}
 			placeholder="e.g. 95"
-			hint="Optional"
+			hint={$_('form.optional')}
 		/>
 		<Input
 			id="measured_at"
-			label="Measured At"
+			label={$_('measurements.measuredAtLabel')}
 			type="datetime-local"
 			bind:value={measuredAt}
 			class="col-span-2"
@@ -108,9 +109,9 @@
 	{/if}
 
 	<div class="flex items-center justify-end gap-3 pt-2">
-		<Button variant="ghost" onclick={onCancel}>Cancel</Button>
+		<Button variant="ghost" onclick={onCancel}>{$_('form.cancel')}</Button>
 		<Button variant="primary" {loading} onclick={handleSubmit} type="button">
-			Record Measurement
+			{$_('measurements.recordMeasurement')}
 		</Button>
 	</div>
 </div>
