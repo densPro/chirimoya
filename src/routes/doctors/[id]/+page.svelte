@@ -121,11 +121,11 @@
 	</Card>
  
 	<!-- Tabs -->
-	<div class="flex gap-1 rounded-xl bg-black/20 p-1">
+	<div class="flex gap-1 rounded-xl bg-black/20 p-1 overflow-x-auto scrollbar-none">
 		{#each tabs as tab}
 			<button
 				onclick={() => (activeTab = tab.key)}
-				class="flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200
+				class="flex-1 min-w-[80px] rounded-lg px-3 py-2 text-xs sm:text-sm font-medium transition-all duration-200
 					{activeTab === tab.key
 						? 'bg-[#D4E79E]/10 text-[#D4E79E]'
 						: 'text-[#FDFBF7]/40 hover:text-[#FDFBF7]/70'}"

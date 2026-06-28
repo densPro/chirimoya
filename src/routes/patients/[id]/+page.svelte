@@ -69,7 +69,7 @@
 
 	<!-- Patient Header -->
 	<Card>
-		<div class="flex items-start justify-between gap-4">
+		<div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
 			<div class="flex items-center gap-4">
 				<!-- Avatar -->
 				<div
@@ -96,7 +96,7 @@
 			</div>
 
 			<!-- Actions -->
-			<div class="flex items-center gap-2">
+			<div class="flex flex-wrap items-center gap-2">
 				<!-- Status quick-change -->
 				<div class="flex items-center gap-1 rounded-lg border border-white/10 p-1">
 					{#each (['active', 'inactive', 'deceased'] as PatientStatus[]) as s (s)}
@@ -124,7 +124,7 @@
 	</Card>
 
 	<!-- Tabs -->
-	<div class="flex border-b border-white/[0.06]">
+	<div class="flex border-b border-white/[0.06] overflow-x-auto scrollbar-none whitespace-nowrap">
 		{#each tabs as tab, i (tab)}
 			<button
 				onclick={() => (activeTab = i)}

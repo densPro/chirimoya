@@ -160,7 +160,7 @@
 
 <form onsubmit={handleSubmit} class="flex flex-col">
 	<!-- Tab Bar -->
-	<div class="flex border-b border-white/[0.06] px-6 pt-2">
+	<div class="flex border-b border-white/[0.06] px-6 pt-2 overflow-x-auto scrollbar-none whitespace-nowrap">
 		{#each tabs as tab}
 			<button
 				type="button"
@@ -181,11 +181,11 @@
 	<div class="flex-1 overflow-y-auto p-6 space-y-4">
 		<!-- Demographics -->
 		{#if activeTab === 'demographics'}
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<Input id="doc-first-name" label={$_('form.labels.firstName')} bind:value={firstName} required error={errors.firstName} disabled={loading} />
 				<Input id="doc-last-name" label={$_('form.labels.lastName')} bind:value={lastName} required error={errors.lastName} disabled={loading} />
 			</div>
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<Input id="doc-dob" label={$_('form.labels.dob')} type="date" bind:value={dateOfBirth} disabled={loading} />
 				<Select id="doc-gender" label={$_('form.labels.gender')} bind:value={gender} options={genderOptions} disabled={loading} />
 			</div>
@@ -201,12 +201,12 @@
 			
 			<div class="border-t border-white/[0.06] pt-4">
 				<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('form.labels.licenseInfo')} ({$_('form.optional')})</h3>
-				<div class="grid grid-cols-2 gap-4">
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 					<Input id="doc-lic-num" label={$_('form.labels.licenseNumber')} bind:value={licenseNumber} disabled={loading} />
 					<Input id="doc-lic-body" label={$_('form.labels.issuingBody')} bind:value={issuingBody} disabled={loading} />
 				</div>
 			</div>
-			<div class="grid grid-cols-3 gap-4">
+			<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 				<Input id="doc-lic-issue" label={$_('form.labels.licenseIssue')} type="date" bind:value={licenseIssue} disabled={loading} />
 				<Input id="doc-lic-expiry" label={$_('form.labels.licenseExpiry')} type="date" bind:value={licenseExpiry} disabled={loading} />
 				<Input id="doc-lic-state" label={$_('form.labels.licenseState')} bind:value={licenseState} placeholder="FL" disabled={loading} />
@@ -216,15 +216,15 @@
 
 		<!-- Contact & Address -->
 		{#if activeTab === 'contact'}
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<Input id="doc-phone" label={$_('form.labels.phone')} bind:value={phone} placeholder="+1 (555) 000-0000" disabled={loading} />
 				<Input id="doc-email" label={$_('form.labels.email')} type="email" bind:value={email} disabled={loading} />
 			</div>
 			<div class="border-t border-white/[0.06] pt-4">
 				<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('form.labels.address')} ({$_('form.optional')})</h3>
-				<div class="grid grid-cols-2 gap-4">
-					<Input id="doc-street1" label={$_('form.labels.street1')} bind:value={street1} class="col-span-2" disabled={loading} />
-					<Input id="doc-street2" label={$_('form.labels.street2')} bind:value={street2} class="col-span-2" hint={$_('form.placeholders.street2')} disabled={loading} />
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<Input id="doc-street1" label={$_('form.labels.street1')} bind:value={street1} class="col-span-1 sm:col-span-2" disabled={loading} />
+					<Input id="doc-street2" label={$_('form.labels.street2')} bind:value={street2} class="col-span-1 sm:col-span-2" hint={$_('form.placeholders.street2')} disabled={loading} />
 					<Input id="doc-city" label={$_('form.labels.city')} bind:value={city} disabled={loading} />
 					<Input id="doc-addr-state" label={$_('form.labels.state')} bind:value={addrState} disabled={loading} />
 					<Input id="doc-postal" label={$_('form.labels.postal')} bind:value={postal} disabled={loading} />

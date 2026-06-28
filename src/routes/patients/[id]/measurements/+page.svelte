@@ -69,7 +69,7 @@
 
 <div class="space-y-6">
 	<!-- Header -->
-	<div class="flex items-center justify-between">
+	<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 		<div class="flex items-center gap-3">
 			<a
 				href="/patients/{patientId}"
@@ -84,7 +84,7 @@
 				<p class="text-sm text-[#FDFBF7]/40">{$_('measurements.recordsCount', { values: { total } })}</p>
 			</div>
 		</div>
-		<Button variant="primary" onclick={() => (addModalOpen = true)}>
+		<Button variant="primary" onclick={() => (addModalOpen = true)} class="w-full sm:w-auto justify-center">
 			<Plus size={16} />
 			{$_('measurements.recordMeasurement')}
 		</Button>

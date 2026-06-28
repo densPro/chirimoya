@@ -51,6 +51,7 @@ VITE_API_BASE_URL=http://localhost:8000
 - **Accent:** `#D4E79E` (Vibrant Lime Pop)
 - **Text:** `#FDFBF7` (Custard Cream)
 - **Font:** Macondo (interface) + JetBrains Mono (clinical values)
+- **Responsiveness:** Fully responsive interface (adaptive components, collapsible mobile sidebar/hamburger menu, stacked forms, and responsive tables/modals) optimized for clinical use on desktops, tablets, and mobile phones.
 
 ---
 

@@ -199,7 +199,7 @@
 
 <div class="flex flex-col">
 	<!-- Tab Bar -->
-	<div class="flex border-b border-white/[0.06] px-6 pt-2">
+	<div class="flex border-b border-white/[0.06] px-6 pt-2 overflow-x-auto scrollbar-none whitespace-nowrap">
 		{#each tabs as tab, i (tab)}
 			<button
 				onclick={() => (activeTab = i)}
@@ -219,14 +219,14 @@
 	<div class="flex-1 overflow-y-auto p-6">
 		<!-- Tab 0: Demographics -->
 		{#if activeTab === 0}
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<Input id="first_name" label={$_('form.labels.firstName')} bind:value={firstName} required error={errors.first_name} />
 				<Input id="last_name" label={$_('form.labels.lastName')} bind:value={lastName} required error={errors.last_name} />
 				<Input id="dob" label={$_('form.labels.dob')} type="date" bind:value={dob} required error={errors.date_of_birth} />
 				<Select id="gender" label={$_('form.labels.gender')} bind:value={gender} options={genderOptions} placeholder={$_('form.placeholders.selectGender')} required error={errors.gender} />
 				<Select id="marital_status" label={$_('form.labels.maritalStatus')} bind:value={maritalStatus} options={maritalOptions} placeholder={$_('form.placeholders.selectMarital')} />
 				<Input id="ssn" label={$_('form.labels.ssn')} bind:value={ssnLast4} placeholder="1234" maxlength="4" hint={$_('form.optional')} />
-				<Input id="national_id" label={$_('form.labels.nationalId')} bind:value={nationalId} hint={$_('form.optional')} class="col-span-2" />
+				<Input id="national_id" label={$_('form.labels.nationalId')} bind:value={nationalId} hint={$_('form.optional')} class="col-span-1 sm:col-span-2" />
 			</div>
 		{/if}
 
@@ -292,7 +292,7 @@
 			<div class="space-y-5">
 				<div>
 					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.contact.title')}</h3>
-					<div class="grid grid-cols-2 gap-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<Input id="phone" label={$_('form.labels.phone')} type="tel" bind:value={phone} required error={errors.phone_number} />
 						<Input id="email" label={$_('form.labels.email')} type="email" bind:value={email} error={errors.email} hint={$_('form.optional')} />
 						<Input id="secondary_phone" label={$_('form.labels.secondaryPhone')} type="tel" bind:value={secondaryPhone} hint={$_('form.optional')} />
@@ -300,9 +300,9 @@
 				</div>
 				<div class="border-t border-white/[0.06] pt-4">
 					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.contact.address')} ({$_('form.optional')})</h3>
-					<div class="grid grid-cols-2 gap-4">
-						<Input id="street1" label={$_('form.labels.street1')} bind:value={street1} class="col-span-2" />
-						<Input id="street2" label={$_('form.labels.street2')} bind:value={street2} class="col-span-2" hint={$_('form.placeholders.street2')} />
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<Input id="street1" label={$_('form.labels.street1')} bind:value={street1} class="col-span-1 sm:col-span-2" />
+						<Input id="street2" label={$_('form.labels.street2')} bind:value={street2} class="col-span-1 sm:col-span-2" hint={$_('form.placeholders.street2')} />
 						<Input id="city" label={$_('form.labels.city')} bind:value={city} />
 						<Input id="state" label={$_('form.labels.state')} bind:value={state_} />
 						<Input id="postal" label={$_('form.labels.postal')} bind:value={postalCode} />
@@ -317,8 +317,8 @@
 			<div class="space-y-5">
 				<div>
 					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.emergency.title')} ({$_('form.optional')})</h3>
-					<div class="grid grid-cols-2 gap-4">
-						<Input id="ec_name" label={$_('form.labels.ecName')} bind:value={ecName} class="col-span-2" />
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<Input id="ec_name" label={$_('form.labels.ecName')} bind:value={ecName} class="col-span-1 sm:col-span-2" />
 						<Input id="ec_relation" label={$_('form.labels.ecRelation')} bind:value={ecRelation} />
 						<Input id="ec_phone" label={$_('form.labels.ecPhone')} type="tel" bind:value={ecPhone} />
 						<Input id="ec_email" label={$_('form.labels.ecEmail')} type="email" bind:value={ecEmail} hint={$_('form.optional')} />
@@ -326,8 +326,8 @@
 				</div>
 				<div class="border-t border-white/[0.06] pt-4">
 					<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('patient.insurance.title')} ({$_('form.optional')})</h3>
-					<div class="grid grid-cols-2 gap-4">
-						<Input id="ins_provider" label={$_('form.labels.insProvider')} bind:value={insProvider} class="col-span-2" />
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<Input id="ins_provider" label={$_('form.labels.insProvider')} bind:value={insProvider} class="col-span-1 sm:col-span-2" />
 						<Input id="ins_policy" label={$_('form.labels.insPolicy')} bind:value={insPolicy} />
 						<Input id="ins_group" label={$_('form.labels.insGroup')} bind:value={insGroup} hint={$_('form.optional')} />
 						<Input id="ins_subscriber" label={$_('form.labels.insSubscriber')} bind:value={insSubscriber} hint={$_('form.optional')} />

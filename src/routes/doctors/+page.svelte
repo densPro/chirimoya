@@ -138,12 +138,12 @@
 
 <div class="space-y-6">
 	<!-- Header -->
-	<div class="flex items-center justify-between">
+	<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 		<div>
 			<h2 class="text-2xl font-bold text-[#FDFBF7]">{$_('doctors.title')}</h2>
 			<p class="mt-0.5 text-sm text-[#FDFBF7]/40">{$_('doctors.subtitle')}</p>
 		</div>
-		<Button onclick={openCreate} id="create-doctor-btn">
+		<Button onclick={openCreate} id="create-doctor-btn" class="w-full sm:w-auto justify-center">
 			<Plus size={14} />
 			{$_('doctors.new')}
 		</Button>

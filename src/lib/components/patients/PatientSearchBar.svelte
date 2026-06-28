@@ -90,8 +90,8 @@
 	</div>
 
 	<!-- Status chips + reset -->
-	<div class="flex items-center justify-between">
-		<div class="flex items-center gap-2">
+	<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+		<div class="flex flex-wrap items-center gap-2">
 			<span class="text-xs text-[#FDFBF7]/40">{$_('patients.status')}:</span>
 			{#each statusOptions as opt (opt)}
 				<button
@@ -106,7 +106,7 @@
 		</div>
 		<button
 			onclick={handleReset}
-			class="text-xs text-[#FDFBF7]/30 transition-colors hover:text-[#FDFBF7]/60"
+			class="text-left sm:text-right text-xs text-[#FDFBF7]/30 transition-colors hover:text-[#FDFBF7]/60"
 		>
 			{$_('patients.clearFilters')}
 		</button>

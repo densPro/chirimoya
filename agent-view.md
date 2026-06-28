@@ -65,6 +65,16 @@ The color strategy adapts natural Chirimoya tones into an ultra-clean, clinical 
 
 ---
 
+## 📱 Responsiveness & Mobile Support
+
+The clinical interface must be fully responsive to support clinical staff on both desktop and mobile platforms.
+
+- **Mobile Navigation Menu**: On viewports smaller than desktop/laptop sizes, the sidebar layout must collapse and convert into a mobile-friendly slide-over menu or drawer toggled via a hamburger button.
+- **Component Scaling**: All layouts, metrics cards, gauges, charts, tables, and multi-step forms (including Patient, Doctor, and Specialty forms) must automatically stack or adapt to fit perfectly inside smaller screens without breaking the design or requiring horizontal scrolling.
+- **Touch-Friendly Controls**: Touch targets must be optimized, and modal dialogs must adjust to full screen or narrow widths on mobile devices.
+
+---
+
 ## 🎬 Motion & Transitions
 
 *   **Micro-Interactions:** `transition-all duration-200`
