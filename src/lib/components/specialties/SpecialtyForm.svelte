@@ -24,21 +24,21 @@
 
 	let errors = $state<Record<string, string>>({});
 
-	const categoryOptions: { value: SpecialtyCategory; label: string }[] = [
-		{ value: 'atencion_primaria',  label: 'Atención Primaria'  },
-		{ value: 'quirurgica',         label: 'Quirúrgica'          },
-		{ value: 'diagnostica',       label: 'Diagnóstica'         },
-		{ value: 'terapeutica',        label: 'Terapéutica'         },
-		{ value: 'salud_mental',       label: 'Salud Mental'        },
-		{ value: 'emergencia',         label: 'Emergencia'          },
-		{ value: 'otra',               label: 'Otra'                }
-	];
+	const categoryOptions = $derived<Array<{ value: SpecialtyCategory; label: string }>>([
+		{ value: 'atencion_primaria', label: $_('form.specialtyCategories.atencion_primaria', { default: 'Atención Primaria' }) },
+		{ value: 'quirurgica',        label: $_('form.specialtyCategories.quirurgica', { default: 'Quirúrgica' }) },
+		{ value: 'diagnostica',      label: $_('form.specialtyCategories.diagnostica', { default: 'Diagnóstica' }) },
+		{ value: 'terapeutica',       label: $_('form.specialtyCategories.terapeutica', { default: 'Terapéutica' }) },
+		{ value: 'salud_mental',      label: $_('form.specialtyCategories.salud_mental', { default: 'Salud Mental' }) },
+		{ value: 'emergencia',        label: $_('form.specialtyCategories.emergencia', { default: 'Emergencia' }) },
+		{ value: 'otra',              label: $_('form.specialtyCategories.otra', { default: 'Otra' }) }
+	]);
 
 	function validate(): boolean {
 		errors = {};
-		if (!isEdit && !code.trim()) errors.code = 'Code is required';
-		if (!isEdit && !/^[A-Z0-9_]+$/.test(code.trim())) errors.code = 'Code must be uppercase letters, digits or underscores';
-		if (!name.trim()) errors.name = 'Name is required';
+		if (!isEdit && !code.trim()) errors.code = $_('form.validation.codeRequired');
+		if (!isEdit && !/^[A-Z0-9_]+$/.test(code.trim())) errors.code = $_('form.validation.codeFormat');
+		if (!name.trim()) errors.name = $_('form.validation.nameRequired');
 		return Object.keys(errors).length === 0;
 	}
 
@@ -65,64 +65,56 @@
 	}
 </script>
 
-<form onsubmit={handleSubmit} class="space-y-4">
-	{#if !isEdit}
-		<div>
-			<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">
-				Code <span class="text-red-400">*</span>
-			</label>
+<form onsubmit={handleSubmit} class="flex flex-col">
+	<!-- Content -->
+	<div class="flex-1 overflow-y-auto p-6 space-y-4">
+		{#if !isEdit}
 			<Input
 				id="specialty-code"
+				label={$_('form.labels.code')}
 				bind:value={code}
 				placeholder="e.g. CARDIO"
+				required
 				error={errors.code}
+				hint={$_('specialties.codeHint', { default: 'Uppercase letters, digits and underscores only. Cannot be changed later.' })}
 				disabled={loading}
 			/>
-			<p class="mt-1 text-xs text-[#FDFBF7]/30">Uppercase letters, digits and underscores only. Cannot be changed later.</p>
-		</div>
-	{/if}
+		{/if}
 
-	<div>
-		<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">
-			Name <span class="text-red-400">*</span>
-		</label>
 		<Input
 			id="specialty-name"
+			label={$_('form.labels.name')}
 			bind:value={name}
 			placeholder="e.g. Cardiology"
+			required
 			error={errors.name}
 			disabled={loading}
 		/>
-	</div>
 
-	<div>
-		<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Category</label>
 		<Select
 			id="specialty-category"
+			label={$_('form.labels.category')}
 			bind:value={category}
 			options={categoryOptions}
 			disabled={loading}
 		/>
-	</div>
 
-	<div>
-		<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">
-			Description <span class="text-[#FDFBF7]/30 text-xs font-normal">(optional)</span>
-		</label>
 		<Textarea
 			id="specialty-description"
+			label={$_('form.labels.description')}
 			bind:value={description}
-			placeholder="Brief description of this specialty…"
+			placeholder={$_('form.placeholders.specialtyDescription')}
 			rows={3}
 			disabled={loading}
 		/>
 	</div>
 
-	<div class="flex justify-end gap-3 pt-2">
+	<!-- Footer actions -->
+	<div class="flex items-center justify-end gap-3 border-t border-white/[0.06] px-6 py-4">
 		<Button variant="ghost" type="button" onclick={onCancel} disabled={loading}>
 			{$_('form.cancel')}
 		</Button>
-		<Button type="submit" {loading}>
+		<Button variant="primary" type="submit" {loading}>
 			{isEdit ? $_('form.saveChanges') : $_('specialties.create')}
 		</Button>
 	</div>

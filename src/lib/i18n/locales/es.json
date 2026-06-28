@@ -231,7 +231,22 @@
       "insSubscriber": "Nombre del Asegurado",
       "insSubRel": "Relación con el Asegurado",
       "insEffective": "Fecha de Inicio",
-      "insExpiration": "Fecha de Vencimiento"
+      "insExpiration": "Fecha de Vencimiento",
+      "name": "Nombre",
+      "code": "Código",
+      "category": "Categoría",
+      "description": "Descripción",
+      "bio": "Biografía",
+      "status": "Estado",
+      "specialty": "Especialidad",
+      "yearsOfExperience": "Años de Experiencia",
+      "licenseInfo": "Información de Licencia",
+      "licenseNumber": "Número de Licencia",
+      "issuingBody": "Organismo Emisor",
+      "licenseIssue": "Fecha de Emisión",
+      "licenseExpiry": "Fecha de Vencimiento",
+      "licenseState": "Estado",
+      "address": "Dirección"
     },
     "placeholders": {
       "selectGender": "Seleccione género",
@@ -240,7 +255,29 @@
       "notes": "Notas opcionales…",
       "allergy": "Escriba alergia y presione Enter",
       "condition": "Escriba condición y presione Enter",
-      "street2": "Apartamento, suite, etc."
+      "street2": "Apartamento, suite, etc.",
+      "selectSpecialty": "Seleccione especialidad",
+      "bio": "Biografía profesional…",
+      "specialtyDescription": "Breve descripción de la especialidad…"
+    },
+    "specialtyCategories": {
+      "atencion_primaria": "Atención Primaria",
+      "quirurgica": "Quirúrgica",
+      "diagnostica": "Diagnóstica",
+      "terapeutica": "Terapéutica",
+      "salud_mental": "Salud Mental",
+      "emergencia": "Emergencia",
+      "otra": "Otra"
+    },
+    "validation": {
+      "required": "Este campo es obligatorio",
+      "firstNameRequired": "El nombre es obligatorio",
+      "lastNameRequired": "El apellido es obligatorio",
+      "specialtyRequired": "La especialidad es obligatoria",
+      "yearsExpNonNegative": "Debe ser un número no negativo",
+      "codeRequired": "El código es obligatorio",
+      "codeFormat": "El código debe contener solo letras mayúsculas, números o guiones bajos",
+      "nameRequired": "El nombre es obligatorio"
     }
   },
   "common": {

@@ -89,18 +89,25 @@
 	// ── Validation ────────────────────────────────────────────────────────────
 	function validate(): boolean {
 		errors = {};
-		if (!firstName.trim()) errors.firstName = 'First name is required';
-		if (!lastName.trim())  errors.lastName  = 'Last name is required';
-		if (!specialtyId)      errors.specialty  = 'Specialty is required';
+		if (!firstName.trim()) errors.firstName = $_('form.validation.firstNameRequired');
+		if (!lastName.trim())  errors.lastName  = $_('form.validation.lastNameRequired');
+		if (!specialtyId)      errors.specialty  = $_('form.validation.specialtyRequired');
 		if (yearsExp && (isNaN(Number(yearsExp)) || Number(yearsExp) < 0))
-			errors.yearsExp = 'Must be a non-negative number';
+			errors.yearsExp = $_('form.validation.yearsExpNonNegative');
 		return Object.keys(errors).length === 0;
 	}
 
 	// ── Submit ────────────────────────────────────────────────────────────────
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
-		if (!validate()) { activeTab = 'demographics'; return; }
+		if (!validate()) {
+			if (errors.firstName || errors.lastName) {
+				activeTab = 'demographics';
+			} else if (errors.specialty || errors.yearsExp) {
+				activeTab = 'professional';
+			}
+			return;
+		}
 
 		const licenseInfo =
 			licenseNumber.trim() && issuingBody.trim()
@@ -151,140 +158,103 @@
 	}
 </script>
 
-<!-- Tabs -->
-<div class="mb-5 flex gap-1 rounded-xl bg-black/20 p-1">
-	{#each tabs as tab}
-		<button
-			type="button"
-			onclick={() => (activeTab = tab.key)}
-			class="flex-1 rounded-lg px-3 py-2 text-xs font-medium transition-all duration-200
-				{activeTab === tab.key
-					? 'bg-[#D4E79E]/10 text-[#D4E79E]'
+<form onsubmit={handleSubmit} class="flex flex-col">
+	<!-- Tab Bar -->
+	<div class="flex border-b border-white/[0.06] px-6 pt-2">
+		{#each tabs as tab}
+			<button
+				type="button"
+				onclick={() => (activeTab = tab.key)}
+				class="relative mr-1 px-3 py-2.5 text-sm font-medium transition-colors {activeTab === tab.key
+					? 'text-[#D4E79E]'
 					: 'text-[#FDFBF7]/40 hover:text-[#FDFBF7]/70'}"
-		>
-			{$_('form.tabs.' + tab.key)}
-		</button>
-	{/each}
-</div>
+			>
+				{$_('form.tabs.' + tab.key)}
+				{#if activeTab === tab.key}
+					<span class="absolute bottom-0 left-0 right-0 h-0.5 rounded-t-full bg-[#D4E79E]"></span>
+				{/if}
+			</button>
+		{/each}
+	</div>
 
-<form onsubmit={handleSubmit} class="space-y-4">
-	<!-- Demographics -->
-	{#if activeTab === 'demographics'}
-		<div class="grid grid-cols-2 gap-4">
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">First Name *</label>
-				<Input id="doc-first-name" bind:value={firstName} error={errors.firstName} disabled={loading} />
+	<!-- Content -->
+	<div class="flex-1 overflow-y-auto p-6 space-y-4">
+		<!-- Demographics -->
+		{#if activeTab === 'demographics'}
+			<div class="grid grid-cols-2 gap-4">
+				<Input id="doc-first-name" label={$_('form.labels.firstName')} bind:value={firstName} required error={errors.firstName} disabled={loading} />
+				<Input id="doc-last-name" label={$_('form.labels.lastName')} bind:value={lastName} required error={errors.lastName} disabled={loading} />
 			</div>
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Last Name *</label>
-				<Input id="doc-last-name" bind:value={lastName} error={errors.lastName} disabled={loading} />
+			<div class="grid grid-cols-2 gap-4">
+				<Input id="doc-dob" label={$_('form.labels.dob')} type="date" bind:value={dateOfBirth} disabled={loading} />
+				<Select id="doc-gender" label={$_('form.labels.gender')} bind:value={gender} options={genderOptions} disabled={loading} />
 			</div>
-		</div>
-		<div class="grid grid-cols-2 gap-4">
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Date of Birth</label>
-				<Input id="doc-dob" type="date" bind:value={dateOfBirth} disabled={loading} />
+			{#if isEdit}
+				<Select id="doc-status" label={$_('form.labels.status')} bind:value={statusField} options={statusOptions} disabled={loading} />
+			{/if}
+		{/if}
+
+		<!-- Professional -->
+		{#if activeTab === 'professional'}
+			<Select id="doc-specialty" label={$_('form.labels.specialty')} bind:value={specialtyId} options={specialtyOptions} placeholder={$_('form.placeholders.selectSpecialty')} required error={errors.specialty} disabled={loading} />
+			<Input id="doc-exp" label={$_('form.labels.yearsOfExperience')} type="number" bind:value={yearsExp} error={errors.yearsExp} placeholder="0" disabled={loading} />
+			
+			<div class="border-t border-white/[0.06] pt-4">
+				<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('form.labels.licenseInfo')} ({$_('form.optional')})</h3>
+				<div class="grid grid-cols-2 gap-4">
+					<Input id="doc-lic-num" label={$_('form.labels.licenseNumber')} bind:value={licenseNumber} disabled={loading} />
+					<Input id="doc-lic-body" label={$_('form.labels.issuingBody')} bind:value={issuingBody} disabled={loading} />
+				</div>
 			</div>
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Gender</label>
-				<Select id="doc-gender" bind:value={gender} options={genderOptions} disabled={loading} />
+			<div class="grid grid-cols-3 gap-4">
+				<Input id="doc-lic-issue" label={$_('form.labels.licenseIssue')} type="date" bind:value={licenseIssue} disabled={loading} />
+				<Input id="doc-lic-expiry" label={$_('form.labels.licenseExpiry')} type="date" bind:value={licenseExpiry} disabled={loading} />
+				<Input id="doc-lic-state" label={$_('form.labels.licenseState')} bind:value={licenseState} placeholder="FL" disabled={loading} />
 			</div>
-		</div>
-		{#if isEdit}
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Status</label>
-				<Select id="doc-status" bind:value={statusField} options={statusOptions} disabled={loading} />
+			<Textarea id="doc-bio" label={$_('form.labels.bio')} bind:value={bio} rows={3} placeholder={$_('form.placeholders.bio')} disabled={loading} />
+		{/if}
+
+		<!-- Contact & Address -->
+		{#if activeTab === 'contact'}
+			<div class="grid grid-cols-2 gap-4">
+				<Input id="doc-phone" label={$_('form.labels.phone')} bind:value={phone} placeholder="+1 (555) 000-0000" disabled={loading} />
+				<Input id="doc-email" label={$_('form.labels.email')} type="email" bind:value={email} disabled={loading} />
+			</div>
+			<div class="border-t border-white/[0.06] pt-4">
+				<h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-[#FDFBF7]/40">{$_('form.labels.address')} ({$_('form.optional')})</h3>
+				<div class="grid grid-cols-2 gap-4">
+					<Input id="doc-street1" label={$_('form.labels.street1')} bind:value={street1} class="col-span-2" disabled={loading} />
+					<Input id="doc-street2" label={$_('form.labels.street2')} bind:value={street2} class="col-span-2" hint={$_('form.placeholders.street2')} disabled={loading} />
+					<Input id="doc-city" label={$_('form.labels.city')} bind:value={city} disabled={loading} />
+					<Input id="doc-addr-state" label={$_('form.labels.state')} bind:value={addrState} disabled={loading} />
+					<Input id="doc-postal" label={$_('form.labels.postal')} bind:value={postal} disabled={loading} />
+					<Input id="doc-country" label={$_('form.labels.country')} bind:value={country} disabled={loading} />
+				</div>
 			</div>
 		{/if}
-	{/if}
+	</div>
 
-	<!-- Professional -->
-	{#if activeTab === 'professional'}
-		<div>
-			<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Specialty *</label>
-			<Select id="doc-specialty" bind:value={specialtyId} options={specialtyOptions} error={errors.specialty} disabled={loading} />
-		</div>
-		<div>
-			<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Years of Experience</label>
-			<Input id="doc-exp" type="number" bind:value={yearsExp} error={errors.yearsExp} placeholder="0" disabled={loading} />
-		</div>
-		<p class="text-xs font-semibold text-[#FDFBF7]/30 uppercase tracking-wider mt-4 mb-2">License Info</p>
-		<div class="grid grid-cols-2 gap-4">
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">License Number</label>
-				<Input id="doc-lic-num" bind:value={licenseNumber} disabled={loading} />
-			</div>
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Issuing Body</label>
-				<Input id="doc-lic-body" bind:value={issuingBody} disabled={loading} />
-			</div>
-		</div>
-		<div class="grid grid-cols-3 gap-4">
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Issue Date</label>
-				<Input id="doc-lic-issue" type="date" bind:value={licenseIssue} disabled={loading} />
-			</div>
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Expiry Date</label>
-				<Input id="doc-lic-expiry" type="date" bind:value={licenseExpiry} disabled={loading} />
-			</div>
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">State</label>
-				<Input id="doc-lic-state" bind:value={licenseState} placeholder="FL" disabled={loading} />
-			</div>
-		</div>
-		<div>
-			<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Bio</label>
-			<Textarea id="doc-bio" bind:value={bio} rows={3} placeholder="Professional biography…" disabled={loading} />
-		</div>
-	{/if}
-
-	<!-- Contact & Address -->
-	{#if activeTab === 'contact'}
-		<div class="grid grid-cols-2 gap-4">
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Phone</label>
-				<Input id="doc-phone" bind:value={phone} placeholder="+1 (555) 000-0000" disabled={loading} />
-			</div>
-			<div>
-				<label class="block text-xs font-medium text-[#FDFBF7]/60 mb-1.5">Email</label>
-				<Input id="doc-email" type="email" bind:value={email} disabled={loading} />
-			</div>
-		</div>
-		<p class="text-xs font-semibold text-[#FDFBF7]/30 uppercase tracking-wider mt-4 mb-2">Address</p>
-		<Input id="doc-street1" bind:value={street1} placeholder="Street line 1" disabled={loading} />
-		<Input id="doc-street2" bind:value={street2} placeholder="Apartment, suite…" disabled={loading} />
-		<div class="grid grid-cols-2 gap-4">
-			<Input id="doc-city" bind:value={city} placeholder="City" disabled={loading} />
-			<Input id="doc-addr-state" bind:value={addrState} placeholder="State / Province" disabled={loading} />
-		</div>
-		<div class="grid grid-cols-2 gap-4">
-			<Input id="doc-postal" bind:value={postal} placeholder="Postal Code" disabled={loading} />
-			<Input id="doc-country" bind:value={country} placeholder="Country" disabled={loading} />
-		</div>
-	{/if}
-
-	<!-- Actions -->
-	<div class="flex justify-between pt-2">
+	<!-- Footer actions -->
+	<div class="flex items-center justify-between border-t border-white/[0.06] px-6 py-4">
 		<div class="flex gap-2">
 			{#if activeTab !== 'demographics'}
 				<Button variant="ghost" type="button" onclick={() => {
 					if (activeTab === 'professional') activeTab = 'demographics';
 					else if (activeTab === 'contact') activeTab = 'professional';
-				}} disabled={loading}>← Back</Button>
+				}} disabled={loading}>← {$_('form.previous')}</Button>
 			{/if}
 		</div>
-		<div class="flex gap-3">
+		<div class="flex items-center gap-3">
 			<Button variant="ghost" type="button" onclick={onCancel} disabled={loading}>
 				{$_('form.cancel')}
 			</Button>
 			{#if activeTab !== 'contact'}
-				<Button type="button" onclick={() => {
+				<Button variant="secondary" type="button" onclick={() => {
 					if (activeTab === 'demographics') activeTab = 'professional';
 					else if (activeTab === 'professional') activeTab = 'contact';
-				}} disabled={loading}>Next →</Button>
+				}} disabled={loading}>{$_('form.next')} →</Button>
 			{:else}
-				<Button type="submit" {loading}>
+				<Button variant="primary" type="submit" {loading}>
 					{isEdit ? $_('form.saveChanges') : $_('doctors.create')}
 				</Button>
 			{/if}

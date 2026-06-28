@@ -231,7 +231,22 @@
       "insSubscriber": "Subscriber Name",
       "insSubRel": "Subscriber Relationship",
       "insEffective": "Effective Date",
-      "insExpiration": "Expiration Date"
+      "insExpiration": "Expiration Date",
+      "name": "Name",
+      "code": "Code",
+      "category": "Category",
+      "description": "Description",
+      "bio": "Biography",
+      "status": "Status",
+      "specialty": "Specialty",
+      "yearsOfExperience": "Years of Experience",
+      "licenseInfo": "License Information",
+      "licenseNumber": "License Number",
+      "issuingBody": "Issuing Body",
+      "licenseIssue": "Issue Date",
+      "licenseExpiry": "Expiration Date",
+      "licenseState": "State",
+      "address": "Address"
     },
     "placeholders": {
       "selectGender": "Select gender",
@@ -240,7 +255,29 @@
       "notes": "Optional notes…",
       "allergy": "Type allergy and press Enter",
       "condition": "Type condition and press Enter",
-      "street2": "Apartment, suite, etc."
+      "street2": "Apartment, suite, etc.",
+      "selectSpecialty": "Select specialty",
+      "bio": "Professional biography…",
+      "specialtyDescription": "Brief description of this specialty…"
+    },
+    "specialtyCategories": {
+      "atencion_primaria": "Primary Care",
+      "quirurgica": "Surgical",
+      "diagnostica": "Diagnostic",
+      "terapeutica": "Therapeutic",
+      "salud_mental": "Mental Health",
+      "emergencia": "Emergency",
+      "otra": "Other"
+    },
+    "validation": {
+      "required": "This field is required",
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "specialtyRequired": "Specialty is required",
+      "yearsExpNonNegative": "Must be a non-negative number",
+      "codeRequired": "Code is required",
+      "codeFormat": "Code must contain only uppercase letters, digits, or underscores",
+      "nameRequired": "Name is required"
     }
   },
   "common": {
