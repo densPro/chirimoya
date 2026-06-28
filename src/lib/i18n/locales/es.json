@@ -161,6 +161,9 @@
       "saveSuccess": "Medición registrada con éxito",
       "saveFailed": "Error al registrar medición"
     },
+    "validation": {
+      "atLeastOne": "Se requiere al menos una medición (altura, peso, cintura o cadera)"
+    },
     "activity": {
       "sedentary": "Sedentario",
       "lightly_active": "Ligeramente Activo",
@@ -277,7 +280,15 @@
       "yearsExpNonNegative": "Debe ser un número no negativo",
       "codeRequired": "El código es obligatorio",
       "codeFormat": "El código debe contener solo letras mayúsculas, números o guiones bajos",
-      "nameRequired": "El nombre es obligatorio"
+      "nameRequired": "El nombre es obligatorio",
+      "requiredPattern": "El campo {field} es obligatorio",
+      "minLengthPattern": "El campo {field} debe tener al menos {min} caracteres",
+      "maxLengthPattern": "El campo {field} debe tener como máximo {max} caracteres",
+      "invalidDatePattern": "El campo {field} no es una fecha válida",
+      "invalidEmailPattern": "El campo {field} no es un correo electrónico válido",
+      "invalidPhonePattern": "El campo {field} no es un número de teléfono válido",
+      "ssnFormat": "Los últimos cuatro dígitos del SSN deben tener exactamente 4 dígitos",
+      "positiveNumberPattern": "El campo {field} debe ser un número positivo"
     }
   },
   "common": {

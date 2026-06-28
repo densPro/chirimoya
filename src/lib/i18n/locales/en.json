@@ -161,6 +161,9 @@
       "saveSuccess": "Measurement recorded successfully",
       "saveFailed": "Failed to record measurement"
     },
+    "validation": {
+      "atLeastOne": "At least one measurement (height, weight, waist, or hip) is required"
+    },
     "activity": {
       "sedentary": "Sedentary",
       "lightly_active": "Lightly Active",
@@ -277,7 +280,15 @@
       "yearsExpNonNegative": "Must be a non-negative number",
       "codeRequired": "Code is required",
       "codeFormat": "Code must contain only uppercase letters, digits, or underscores",
-      "nameRequired": "Name is required"
+      "nameRequired": "Name is required",
+      "requiredPattern": "{field} is required",
+      "minLengthPattern": "{field} must be at least {min} characters",
+      "maxLengthPattern": "{field} must be at most {max} characters",
+      "invalidDatePattern": "{field} is not a valid date",
+      "invalidEmailPattern": "{field} is not a valid email address",
+      "invalidPhonePattern": "{field} is not a valid phone number",
+      "ssnFormat": "SSN last four must be exactly 4 digits",
+      "positiveNumberPattern": "{field} must be a positive number"
     }
   },
   "common": {

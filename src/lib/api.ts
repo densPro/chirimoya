@@ -43,14 +43,36 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 	});
 
 	if (!res.ok) {
-		let detail = `HTTP ${res.status}`;
+		let detail: any = `HTTP ${res.status}`;
 		try {
 			const body = await res.json();
 			detail = body?.detail ?? detail;
 		} catch {
 			// ignore
 		}
-		throw new ApiError(res.status, String(detail));
+
+		let message = '';
+		if (Array.isArray(detail)) {
+			// FastAPI validation error list
+			message = detail
+				.map((err: any) => {
+					if (err && typeof err === 'object') {
+						const field = Array.isArray(err.loc)
+							? err.loc.filter((l: any) => l !== 'body').join('.')
+							: '';
+						const msg = err.msg || JSON.stringify(err);
+						return field ? `${field}: ${msg}` : msg;
+					}
+					return String(err);
+				})
+				.join('\n');
+		} else if (typeof detail === 'object' && detail !== null) {
+			message = JSON.stringify(detail);
+		} else {
+			message = String(detail);
+		}
+
+		throw new ApiError(res.status, message);
 	}
 
 	// 204 No Content

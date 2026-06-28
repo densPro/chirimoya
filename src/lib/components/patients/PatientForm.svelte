@@ -340,7 +340,7 @@
 		{/if}
 
 		{#if globalError}
-			<p class="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
+			<p class="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-300 whitespace-pre-wrap">
 				{globalError}
 			</p>
 		{/if}
