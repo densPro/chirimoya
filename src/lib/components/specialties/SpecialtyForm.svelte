@@ -19,19 +19,19 @@
 
 	let code = $state(specialty?.code ?? '');
 	let name = $state(specialty?.name ?? '');
-	let category = $state<SpecialtyCategory>(specialty?.category ?? 'therapeutic');
+	let category = $state<SpecialtyCategory>(specialty?.category ?? 'terapeutica');
 	let description = $state(specialty?.description ?? '');
 
 	let errors = $state<Record<string, string>>({});
 
 	const categoryOptions: { value: SpecialtyCategory; label: string }[] = [
-		{ value: 'primary_care',  label: 'Primary Care'  },
-		{ value: 'surgical',      label: 'Surgical'       },
-		{ value: 'diagnostic',    label: 'Diagnostic'     },
-		{ value: 'therapeutic',   label: 'Therapeutic'    },
-		{ value: 'mental_health', label: 'Mental Health'  },
-		{ value: 'emergency',     label: 'Emergency'      },
-		{ value: 'other',         label: 'Other'          }
+		{ value: 'atencion_primaria',  label: 'Atención Primaria'  },
+		{ value: 'quirurgica',         label: 'Quirúrgica'          },
+		{ value: 'diagnostica',       label: 'Diagnóstica'         },
+		{ value: 'terapeutica',        label: 'Terapéutica'         },
+		{ value: 'salud_mental',       label: 'Salud Mental'        },
+		{ value: 'emergencia',         label: 'Emergencia'          },
+		{ value: 'otra',               label: 'Otra'                }
 	];
 
 	function validate(): boolean {

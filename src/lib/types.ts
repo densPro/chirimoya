@@ -200,13 +200,13 @@ export interface HealthResponseDTO {
 // ─── Specialty ───────────────────────────────────────────────────────────────
 
 export type SpecialtyCategory =
-	| 'primary_care'
-	| 'surgical'
-	| 'diagnostic'
-	| 'therapeutic'
-	| 'mental_health'
-	| 'emergency'
-	| 'other';
+	| 'atencion_primaria'
+	| 'quirurgica'
+	| 'diagnostica'
+	| 'terapeutica'
+	| 'salud_mental'
+	| 'emergencia'
+	| 'otra';
 
 export interface SpecialtyCreateDTO {
 	code: string;
